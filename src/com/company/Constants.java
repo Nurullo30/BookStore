@@ -33,6 +33,8 @@ public abstract class Constants {
     public final static int USER_NAME = 2;
     public final static int USER_SURNAME = 3;
     public final static int USER_AGE = 4;
+    public final static int USER_LOGIN = 5;
+    public final static int USER_PASSWORD = 6;
 
 
 

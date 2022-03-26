@@ -24,6 +24,9 @@ public class Registration {
                         startReg();
                         check = false;
                         break;
+                case "2":
+                    check = false;
+                    break;
                 default:
                     System.out.println("Вы неправильно ввели. Попровуйте еще раз");
                     break;
@@ -56,7 +59,7 @@ public class Registration {
             System.out.println("Пароль: ");
             String password = scanner.nextLine();
 
-            String regStatus  = registrationService.registration(name, surname, String.valueOf(age));
+            String regStatus  = registrationService.registration(name, surname, String.valueOf(age), login , password);
 
             if (regStatus.equals( Constants.SUCCESSFUL)){
                 System.out.println("Вы успешно зарегистрировались! :)");
@@ -64,6 +67,8 @@ public class Registration {
                 break;
             } else if (regStatus.equals(Constants.FAILED)){
                 System.out.println("Регистрация не прошло успешно! :( ");
+                check = false;
+                break;
             }
         }
     }

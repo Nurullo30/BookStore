@@ -11,19 +11,16 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
 public class UserDataBase {
     private List<Users> users;
     private LoadingFileData loadingFileData;
-    private HashMap<String, Users> usersList;
     private String userPath;
 
     public UserDataBase(){
         users = new ArrayList<>();
-        usersList = new HashMap<>();
         init();
     }
 
@@ -37,8 +34,6 @@ public class UserDataBase {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
     }
     public String addNewUser(Users user, UserTypes userType){
         users.add(user);
@@ -53,9 +48,10 @@ public class UserDataBase {
 
     public void exportUsers() throws IOException {
        FileWriter fileWriter = new FileWriter(userPath);
-        for (int i = 0; i < users.size(); i++) {
-            fileWriter.write(i+1 + ":" + users.get(i).getId() + ":" +
-                    users.get(i).getName() + ":" + users.get(i).getSurname() + ":" + users.get(i).getAge() + "\n");
+        for (Users user: users) {
+            int order = 0;
+            fileWriter.write(order++ +" :" + user.getId() + ":" + user.getName() + ":" + user.getSurname()
+                    + ":" + user.getAge() + ":" + user.getLogin() + ":" + user.getPassword());
         }
         fileWriter.flush();
         fileWriter.close();
@@ -69,7 +65,7 @@ public class UserDataBase {
             String user = scanner.nextLine();
             String [] usersArr = user.split(":");
             users.add(new Users(usersArr[Constants.USER_ID],usersArr[Constants.USER_NAME],usersArr[Constants.USER_SURNAME],
-                    usersArr[Constants.USER_AGE]));
+                    usersArr[Constants.USER_AGE], usersArr[Constants.USER_LOGIN], usersArr[Constants.USER_PASSWORD]));
         }
     }
 

@@ -5,12 +5,15 @@ public class Users {
     private String name;
     private String surname;
     private String age;
+    private String login, password;
 
-    public Users(String id, String name, String surname, String age) {
+    public Users(String id, String name, String surname, String age, String login, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
         this.age = age;
+        this.login = login;
+        this.password = password;
     }
 
 
@@ -18,31 +21,24 @@ public class Users {
         return id;
     }
 
-    public void setId(String id) {
-        this.id = id;
-    }
-
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     public String getSurname() {
         return surname;
     }
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
-
     public String getAge() {
         return age;
     }
 
-    public void setAge(String age) {
-        this.age = age;
+    public String getLogin() {
+        return login;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
 }

@@ -19,9 +19,8 @@ public class Process{
     private void mainMenu(){
         scanner = new Scanner(System.in);
         boolean check = true;
-
+        System.out.println("Добро пожаловать на наш онлайн книжный магазин!");
         while (check){
-            System.out.println("Добро пожаловать на наш онлайн книжный магазин!");
             System.out.println(" 1. Войти " + "2. Регистрация");
 
             int inputNumber = scanner.nextInt();
