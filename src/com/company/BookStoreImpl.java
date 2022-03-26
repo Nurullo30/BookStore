@@ -58,9 +58,9 @@ public class BookStoreImpl implements BookStoreInterface {
     public boolean checkStatus(int id){
         checkIdRange = validation.checkIdRange(id, printAllBooks());
         checkBookId = validation.checkBookId(id, printAllBooks());
-        if (checkIdRange && checkBookId){
+        if (checkIdRange && checkBookId)
             return true;
-        }
+
         return false;
     }
 
@@ -162,7 +162,7 @@ public class BookStoreImpl implements BookStoreInterface {
                     book.getPrice() + ":" +
                     book.getAmount() + ":"+
                     book.getAmountLeft() + ":"+
-                    new SimpleDateFormat("dd/MM/YYYY").format(book.getDate()) +
+                    new SimpleDateFormat("dd/MM/yyyy").format(book.getDate()) +
                     "\n");
         }
         fileWriter.flush();
@@ -306,6 +306,11 @@ public class BookStoreImpl implements BookStoreInterface {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void blaBla() {
+
     }
 
 }

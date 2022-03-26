@@ -1,7 +1,7 @@
 package com.company.CommonService;
 
-import com.company.Login.LoginService;
 import com.company.Login.UserTypes;
+import com.company.Registration.Registration;
 
 import java.io.FileNotFoundException;
 import java.util.Scanner;
@@ -9,33 +9,31 @@ import java.util.Scanner;
 public class Process{
     private UserTypes userTypes;
     private Scanner scanner;
-    private Boolean check;
+    private Registration registration;
 
     public Process(){
-        init();
         userTypes = UserTypes.GUEST;
+        mainMenu();
     }
 
-    private void init(){
+    private void mainMenu(){
         scanner = new Scanner(System.in);
-        check = true;
+        boolean check = true;
 
         while (check){
             System.out.println("Добро пожаловать на наш онлайн книжный магазин!");
-            System.out.println("1. Купить книгу" + " " +" 2. Войти " + "3. Регистрация");
+            System.out.println(" 1. Войти " + "2. Регистрация");
 
             int inputNumber = scanner.nextInt();
             switch (inputNumber){
                 case 1:
-                    System.out.println("Вы выбрали Купить книгу");
-                    break;
-                case 2:
                     System.out.println("Вы выбрали Войти в кабинет");
                     loginPage();
                     check = false;
                     break;
-                case 3:
+                case 2:
                     System.out.println("Вы выбрали регистрацию");
+                    registration = new Registration();
                     break;
                 default:
                     System.out.println("Пожалуйста попробуйте сново");
@@ -53,12 +51,12 @@ public class Process{
         System.out.println("Ваш Пароль");
         String password = scanner.nextLine();
 
-        LoginService loginService = new LoginService();
-        try {
-            loginService.init(login,password);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+//        LoginService1 loginService = new LoginService1();
+//        try {
+//            loginService.init(login,password);
+//        } catch (FileNotFoundException e) {
+//            e.printStackTrace();
+//        }
 
     }
 }

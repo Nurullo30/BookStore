@@ -29,4 +29,6 @@ public interface BookStoreInterface {
     void addDiscount ();
 
     void createShelve(String shelveType);
+
+    void blaBla();
 }

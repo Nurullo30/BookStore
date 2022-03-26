@@ -1,25 +1,10 @@
 package com.company.Login;
 
-import java.io.FileNotFoundException;
+public interface LoginService {
 
-public class LoginService {
-    private Validation validation;
-    private Login loginPage;
+    void setLogin();
 
-    public LoginService(){
-        loginPage = new Login();
-    }
+    void setPassword();
 
-    public void init(String login, String password) throws FileNotFoundException {
-        try {
-            validation = new Validation();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-
-        loginPage.setLogin(login);
-        loginPage.setPassword(password);
-        validation.checkForUser(loginPage.getLogin(), loginPage.getPassword());
-    }
-
+    void checkForUser();
 }

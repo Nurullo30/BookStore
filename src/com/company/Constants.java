@@ -1,5 +1,7 @@
 package com.company;
 
+import org.omg.PortableInterceptor.SUCCESSFUL;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +26,13 @@ public abstract class Constants {
     public final static String AUTHOR = "AUTHOR";
     public final static String NAME = "NAME";
 
+    public final static String SUCCESSFUL = "SUCCESSFUL";
+    public final static String FAILED = "FAILED";
+
+    public final static int USER_ID = 1;
+    public final static int USER_NAME = 2;
+    public final static int USER_SURNAME = 3;
+    public final static int USER_AGE = 4;
 
 
 

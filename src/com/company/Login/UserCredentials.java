@@ -1,16 +1,11 @@
 package com.company.Login;
 
-import java.io.FileNotFoundException;
-import java.sql.SQLOutput;
-import java.util.Scanner;
-
-public class Login {
+public class UserCredentials {
     private String login;
     private String password;
-    public Login() {
 
+    public UserCredentials() {
     }
-
 
     public String getLogin() {
         return login;
