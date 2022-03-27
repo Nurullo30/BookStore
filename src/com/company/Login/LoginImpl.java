@@ -1,64 +1,48 @@
 package com.company.Login;
 
-import java.io.File;
-import java.io.FileNotFoundException;
+
+import com.company.Constants;
+import com.company.DataBase.UserDataBase;
+import com.company.Registration.RegistrationImpl;
+import com.company.Registration.RegistrationService;
+import org.omg.PortableInterceptor.SUCCESSFUL;
+
 import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.List;
 
 public class LoginImpl implements LoginService {
-    UserTypes userTypes;
-    ArrayList<String[]> users;
-    String[] admins;
-    String[] info = new String[2];
+    private List<Users> usersList;
+    private String userId;
+    UserDataBase userDataBase;
 
     public LoginImpl() {
-        init();
+        usersList = new ArrayList<>();
+        userDataBase = new UserDataBase();
     }
 
-    public void init()  {
-        users = new ArrayList<>();
-        fillUsers();
-    }
+    @Override
+    public String checkForUser(String login, String password) {
+        usersList = userDataBase.getUsers();
 
-//    public void checkForUser(String login , String password) {
-//        for (int i = 0; i < users.size(); i = i + 2) {
-//            String[] temp = users.get(i);
-//
-//            if (login.equals(temp[0]) && password.equals(temp[1])) {
-//                System.out.println("Successful!");
-//            } else {
-//                System.out.println("Please try again later!");
-//            }
-//        }
-//    }
-
-    public void fillUsers() {
-        File usersFile = new File("src/com/company/Directories/Users.txt");
-        Scanner scanner = null;
-        try {
-            scanner = new Scanner(usersFile);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        for (Users user: usersList) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)){
+                userId = user.getId();
+                return Constants.SUCCESSFUL;
+            }
         }
-        while (scanner.hasNextLine()) {
-            String word = scanner.nextLine();
-            info = word.split(":");
-            users.add(info);
+        return Constants.FAILED;
+    }
+
+    public String getUserId() {
+        return userId;
+    }
+
+    public Users getUser(){
+        for (Users user: usersList) {
+            if (user.getId().equals(userId) && userId != null){
+                return user;
+            }
         }
-    }
-
-    @Override
-    public void setLogin() {
-
-    }
-
-    @Override
-    public void setPassword() {
-
-    }
-
-    @Override
-    public void checkForUser() {
-
+        return null;
     }
 }

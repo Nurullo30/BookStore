@@ -4,7 +4,8 @@ import com.company.Constants;
 import com.company.DataBase.UserDataBase;
 import com.company.Login.UserTypes;
 import com.company.Login.Users;
-import org.omg.PortableInterceptor.SUCCESSFUL;
+
+import java.util.List;
 
 public class RegistrationImpl implements RegistrationService{
     private final UserDataBase userDataBase;
@@ -24,6 +25,10 @@ public class RegistrationImpl implements RegistrationService{
                 }
             }
         return Constants.FAILED;
+    }
+
+    public List <Users> getAllUsers(){
+       return userDataBase.getUsers();
     }
 
 }

@@ -49,13 +49,12 @@ public class Registration {
                 age = scanner.nextInt();
             } catch (Exception e){
                 System.out.println("Пожалуйста введите число");
+
                 break;
             }
-
+            scanner.nextLine();
             System.out.println("Логин: ");
             String login = scanner.nextLine();
-
-            scanner.nextLine();
             System.out.println("Пароль: ");
             String password = scanner.nextLine();
 
@@ -72,10 +71,5 @@ public class Registration {
             }
         }
     }
-
-    public void checkForNum(int age){
-
-    }
-
 
 }

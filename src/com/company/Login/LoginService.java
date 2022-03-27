@@ -1,10 +1,14 @@
 package com.company.Login;
 
+import java.util.HashMap;
+
 public interface LoginService {
 
-    void setLogin();
+    String checkForUser(String login, String password);
 
-    void setPassword();
+    String getUserId();
 
-    void checkForUser();
+    Users getUser();
+
+
 }

@@ -15,12 +15,13 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserDataBase {
-    private List<Users> users;
+    private List<Users> usersList;
     private LoadingFileData loadingFileData;
     private String userPath;
+    private Users users;
 
     public UserDataBase(){
-        users = new ArrayList<>();
+        usersList = new ArrayList<>();
         init();
     }
 
@@ -34,9 +35,10 @@ public class UserDataBase {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        users = new Users();
     }
     public String addNewUser(Users user, UserTypes userType){
-        users.add(user);
+        usersList.add(user);
         try {
             exportUsers();
         } catch (IOException e) {
@@ -48,10 +50,10 @@ public class UserDataBase {
 
     public void exportUsers() throws IOException {
        FileWriter fileWriter = new FileWriter(userPath);
-        for (Users user: users) {
-            int order = 0;
-            fileWriter.write(order++ +" :" + user.getId() + ":" + user.getName() + ":" + user.getSurname()
-                    + ":" + user.getAge() + ":" + user.getLogin() + ":" + user.getPassword());
+        for (Users user: usersList) {
+            int order = 1;
+            fileWriter.write(order++ + ":" + user.getId() + ":" + user.getName() + ":" + user.getSurname()
+                    + ":" + user.getAge() + ":" + user.getLogin() + ":" + user.getPassword() + "\n");
         }
         fileWriter.flush();
         fileWriter.close();
@@ -64,14 +66,15 @@ public class UserDataBase {
         while (scanner.hasNextLine()){
             String user = scanner.nextLine();
             String [] usersArr = user.split(":");
-            users.add(new Users(usersArr[Constants.USER_ID],usersArr[Constants.USER_NAME],usersArr[Constants.USER_SURNAME],
+            usersList.add(new Users(usersArr[Constants.USER_ID],usersArr[Constants.USER_NAME],usersArr[Constants.USER_SURNAME],
                     usersArr[Constants.USER_AGE], usersArr[Constants.USER_LOGIN], usersArr[Constants.USER_PASSWORD]));
         }
     }
 
     public List<Users> getUsers() {
-        return users;
+        return usersList;
     }
+
 
 
 }

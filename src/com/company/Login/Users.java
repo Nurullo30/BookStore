@@ -1,11 +1,15 @@
 package com.company.Login;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Users {
     private String id;
     private String name;
     private String surname;
     private String age;
-    private String login, password;
+    private String login;
+    private String password;
 
     public Users(String id, String name, String surname, String age, String login, String password) {
         this.id = id;
@@ -14,6 +18,10 @@ public class Users {
         this.age = age;
         this.login = login;
         this.password = password;
+    }
+
+    public Users(){
+
     }
 
 
@@ -40,5 +48,4 @@ public class Users {
     public String getPassword() {
         return password;
     }
-
 }

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Constants {
-
+    public static final String [] numbers= {"1","2","3","4","5","6","7","8","9"};
     public static final String BOOK_LOAD_PATH = "loadBook";
     public static final String BALANCE_PATH = "balance";
     public static final String CUSTOMER_PATH= "customer";
@@ -35,6 +35,17 @@ public abstract class Constants {
     public final static int USER_AGE = 4;
     public final static int USER_LOGIN = 5;
     public final static int USER_PASSWORD = 6;
+
+
+    public final static int MY_PROFILE = 1;
+    public final static int NEW_BOOKS = 2;
+    public final static int SEE_ALL_BOOKS = 3;
+    public final static int SEE_BY_GENRE = 4;
+    public final static int SEARCH_BOOK = 5;
+    public final static int BUY_BOOK = 6;
+    public final static int MY_ORDERS = 7;
+    public final static int MY_BASKET = 8;
+    public final static int NEWS = 9;
 
 
 

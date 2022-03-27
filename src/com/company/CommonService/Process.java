@@ -1,5 +1,8 @@
 package com.company.CommonService;
 
+import com.company.Login.AdminPanel.Login;
+import com.company.Login.LoginImpl;
+import com.company.Login.LoginService;
 import com.company.Login.UserTypes;
 import com.company.Registration.Registration;
 
@@ -41,21 +44,6 @@ public class Process{
     }
 
     public void loginPage(){
-        scanner = new Scanner(System.in);
-
-        System.out.println("Ваш Логин: ");
-        String login = scanner.nextLine();
-
-
-        System.out.println("Ваш Пароль");
-        String password = scanner.nextLine();
-
-//        LoginService1 loginService = new LoginService1();
-//        try {
-//            loginService.init(login,password);
-//        } catch (FileNotFoundException e) {
-//            e.printStackTrace();
-//        }
-
+        Login login = new Login(new LoginImpl());
     }
 }
