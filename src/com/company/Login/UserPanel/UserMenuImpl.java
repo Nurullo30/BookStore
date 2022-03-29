@@ -10,7 +10,9 @@ import java.util.List;
 public class UserMenuImpl implements UserMenuService{
     private UserDataBase userDataBase;
     private Users user = new Users();
-    public UserMenuImpl(Users user){
+    private String userId;
+    public UserMenuImpl(String userId){
+        this.userId = userId;
         userDataBase = new UserDataBase();
         this.user = user;
     }
@@ -35,11 +37,6 @@ public class UserMenuImpl implements UserMenuService{
                 case Constants.USER_PASSWORD:
             }
         }
-    }
-
-    @Override
-    public void setUser(Users user) {
-        this.user = user;
     }
 
 

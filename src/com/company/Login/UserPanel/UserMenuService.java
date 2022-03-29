@@ -11,5 +11,4 @@ public interface UserMenuService {
 
     void changeCredentials(String number);
 
-    void setUser(Users user);
 }

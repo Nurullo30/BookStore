@@ -31,10 +31,10 @@ public class Login {
         System.out.println("Пароль:");
         String password = scanner.nextLine();
 
-        String loginStatus = loginImpl.checkForUser(login, password);
+        String loginCheck = loginImpl.checkForUser(login, password);
 
-        if (loginStatus.equals(Constants.SUCCESSFUL)){
-            userMenu = new UserMenu(loginImpl.getUser());
+        if (!loginCheck.equals(Constants.FAILED)){
+            userMenu = new UserMenu(loginCheck);
         }
     }
 

@@ -75,6 +75,15 @@ public class UserDataBase {
         return usersList;
     }
 
+    public Users getUser(String userId){
+        for (Users user: usersList) {
+            if (user.getId().equals(userId)){
+                return user;
+            }
+        }
+        return null;
+    }
+
 
 
 }

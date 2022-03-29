@@ -27,7 +27,7 @@ public class LoginImpl implements LoginService {
         for (Users user: usersList) {
             if (user.getLogin().equals(login) && user.getPassword().equals(password)){
                 userId = user.getId();
-                return Constants.SUCCESSFUL;
+                return user.getId();
             }
         }
         return Constants.FAILED;

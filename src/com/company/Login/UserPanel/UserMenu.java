@@ -21,9 +21,8 @@ public class UserMenu {
     private final String basket= "Корзина";
     private final String news= "Новости";
 
-    public UserMenu(Users user){
-        userMenuService = new UserMenuImpl(user);
-        welcomeUser(user);
+    public UserMenu(String userId){
+        userMenuService = new UserMenuImpl(userId);
         mainMenu();
     }
 
@@ -106,9 +105,7 @@ public class UserMenu {
             }
         }
     }
-    public void setUser(Users user){
-        userMenuService.setUser(user);
-    }
+
 }
 
 
