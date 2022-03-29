@@ -6,6 +6,7 @@ import com.company.Login.Users;
 
 import javax.jws.soap.SOAPBinding;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
@@ -20,6 +21,7 @@ public class UserMenu {
     private final String myOrders= "Мои заказы";
     private final String basket= "Корзина";
     private final String news= "Новости";
+    private String [] userCredentials;
 
     public UserMenu(String userId){
         userMenuService = new UserMenuImpl(userId);
@@ -58,7 +60,7 @@ public class UserMenu {
     }
 
     public void myProfile(){
-        String [] userCredentials = userMenuService.userProfile();
+        userCredentials = userMenuService.userProfile();
 
         System.out.println("1.ID: " + userCredentials[Constants.USER_ID]);
         System.out.println("2.Имя: " + userCredentials[Constants.USER_NAME]);
@@ -70,14 +72,14 @@ public class UserMenu {
         Scanner scanner = new Scanner(System.in);
         boolean check = true;
             while(check){
-                System.out.println("1. Изменить детали / 2.Главное меню");
+                System.out.println("1. Изменить детали / * Главное меню");
                 String exitMenu = scanner.nextLine();
                 switch (exitMenu){
                     case "1":
                         System.out.println("1. Изменить детали");
                         changeCredentials();
                         break;
-                    case "2":
+                    case "*":
                         check = false;
                         break;
                     default:
@@ -87,21 +89,30 @@ public class UserMenu {
             }
     }
     public void changeCredentials(){
-
         Scanner scanner = new Scanner(System.in);
+        boolean menuLoop = true;
+        String exitSymbol = "*";
+        int minNum = 1;
+        int maxNum = 7;
 
-        while (true){
-            System.out.println("Что хотели изменить ? (Отправьте число)");
+        while (menuLoop){
+            System.out.println("Что хотели изменить? (Отправьте число) / * Главное меню");
+            String oldValue = scanner.nextLine();
 
-            String number = scanner.nextLine();
+            if (!oldValue.equals(exitSymbol)
+                    && Integer.parseInt(oldValue) > minNum && Integer.parseInt(oldValue) < maxNum){
 
-            for (int i = 0; i < Constants.numbers.length; i++) {
-                if (Constants.numbers[i].equals(number)){
-                    userMenuService.changeCredentials(number);
-                    break;
-                } else if(Constants.numbers.length-1 == i) {
-                    System.out.println("Не правильно ввели! Попробуйте еще раз / 2. Главное меню");
-                }
+                System.out.println("На что хотели поменять?");
+                String newValue = scanner.nextLine();
+
+                userMenuService.changeCredentials(Integer.parseInt(oldValue), newValue);
+                menuLoop= false;
+                break;
+            } else if (oldValue.equals(exitSymbol)){
+                menuLoop= false;
+                break;
+            } else {
+                System.out.println("Не правильно ввели.Попробуйте еще раз!");
             }
         }
     }

@@ -9,6 +9,6 @@ public interface UserMenuService {
 
     String[] userProfile();
 
-    void changeCredentials(String number);
+    void changeCredentials(int oldValue, String newValue);
 
 }

@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserDataBase {
+public class UserDataBase implements UserDataManager{
     private List<Users> usersList;
     private LoadingFileData loadingFileData;
     private String userPath;
@@ -74,16 +74,4 @@ public class UserDataBase {
     public List<Users> getUsers() {
         return usersList;
     }
-
-    public Users getUser(String userId){
-        for (Users user: usersList) {
-            if (user.getId().equals(userId)){
-                return user;
-            }
-        }
-        return null;
-    }
-
-
-
 }

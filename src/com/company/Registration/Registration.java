@@ -13,7 +13,7 @@ public class Registration {
 
     public void mainMenu(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Добро пожаловать в регистрационную форму." + " 1. Начать / 2. Вернуться обратно в главное меню");
+        System.out.println("Добро пожаловать в регистрационную форму." + " 1. Начать / *. Вернуться обратно в главное меню");
 
         Boolean check = true;
         while (check){
@@ -24,7 +24,7 @@ public class Registration {
                         startReg();
                         check = false;
                         break;
-                case "2":
+                case "*":
                     check = false;
                     break;
                 default:

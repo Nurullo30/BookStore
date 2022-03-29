@@ -2,40 +2,65 @@ package com.company.Login.UserPanel;
 
 import com.company.Constants;
 import com.company.DataBase.UserDataBase;
+import com.company.DataBase.UserDataManager;
 import com.company.Login.Users;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 public class UserMenuImpl implements UserMenuService{
-    private UserDataBase userDataBase;
-    private Users user = new Users();
+    private UserDataManager userDataBase;
+    private Users currentUser;
+    private final String [] userCredentials = new String[7];
     private String userId;
+
     public UserMenuImpl(String userId){
         this.userId = userId;
         userDataBase = new UserDataBase();
-        this.user = user;
+        currentUser = new Users();
     }
 
     @Override
     public String[] userProfile() {
-        String [] userCredentials = {user.getId(), user.getName(), user.getSurname(),
-                user.getAge(), user.getLogin(), user.getPassword()};
-
+        List<Users> usersList = userDataBase.getUsers();
+        for (Users user: usersList) {
+            if (user.getId().equals(userId)){
+                currentUser = user;
+                userCredentials[Constants.USER_ID] = user.getId();
+                userCredentials[Constants.USER_NAME] = user.getName();
+                userCredentials[Constants.USER_SURNAME] = user.getSurname();
+                userCredentials[Constants.USER_AGE] = user.getAge();
+                userCredentials[Constants.USER_LOGIN] = user.getLogin();
+                userCredentials[Constants.USER_PASSWORD] = user.getPassword();
+            }
+        }
         return userCredentials;
     }
 
-    public void changeCredentials(String userDetail){
-        for (String num: Constants.numbers) {
-            switch (Integer.parseInt(num)){
-                case Constants.USER_ID:
-
-                case Constants.USER_NAME:
-                case Constants.USER_SURNAME:
-                case Constants.USER_AGE:
-                case Constants.USER_LOGIN:
-                case Constants.USER_PASSWORD:
-            }
+    public void changeCredentials(int oldValue, String newValue){
+        switch (oldValue){
+            case Constants.USER_NAME:
+                 currentUser.setName(newValue);
+                 break;
+            case Constants.USER_SURNAME:
+                 currentUser.setSurname(newValue);
+                 break;
+            case Constants.USER_AGE:
+                 currentUser.setAge(newValue);
+                 break;
+            case Constants.USER_LOGIN:
+                 currentUser.setLogin(newValue);
+                 break;
+            case Constants.USER_PASSWORD:
+                 currentUser.setPassword(newValue);
+                 break;
+        }
+        try {
+            userDataBase.exportUsers();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
