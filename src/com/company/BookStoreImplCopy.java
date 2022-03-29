@@ -1,5 +1,10 @@
 package com.company;
 
+import com.company.commonService.LoadingFileData;
+import com.company.constants.Constants;
+import com.company.entities.Book;
+import com.company.panels.Validation;
+import com.company.panels.adminPanel.AdminService;
 import com.company.shelves.Shelves;
 
 import java.io.File;
@@ -14,31 +19,35 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
-import static com.company.Constants.BOOK_DATE;
-import static com.company.Constants.BOOK_LOAD_PATH;
-import static com.company.Constants.CUSTOMER_PATH;
-import static com.company.Constants.DISCOUNT_PATH;
-import static com.company.Constants.SHELVES;
+import static com.company.constants.Constants.BOOK_LOAD_PATH;
+import static com.company.constants.Constants.CUSTOMER_PATH;
+import static com.company.constants.Constants.DISCOUNT_PATH;
 
 
-public class BookStoreImpl implements BookStoreInterface {
+public class BookStoreImplCopy implements AdminService {
     // Найти точки наследование в классах
     // Текующию дату добавление и сортировка по деталям // Created date // Created by // Edited by
 
     private LoadingFileData loadingFileData;
-    private List<Book> bookList;
+    protected List<Book> bookList;
     private List<String> purchaseList;
     private HashMap<Integer, Book> bookGenre;
     private HashMap<String , String> filePath;
     private List<Shelves> shelves;
     private int balance;
-    private Validation validation;
-    private boolean checkIdRange;
-    private boolean checkBookId;
+    protected Validation validation;
+    protected boolean checkIdRange;
+    protected boolean checkBookId;
     private HashMap<Shelves, Book> bookData = new HashMap<>();
 
-    public BookStoreImpl() throws IOException, ParseException {
-        loadingFileData = new LoadingFileData();
+    public BookStoreImplCopy() {
+        try {
+            loadingFileData = new LoadingFileData();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
         validation = new Validation();
         init();
     }

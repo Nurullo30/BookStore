@@ -1,12 +1,9 @@
-package com.company.CommonService;
+package com.company.commonService;
 
-import com.company.Login.AdminPanel.Login;
-import com.company.Login.LoginImpl;
-import com.company.Login.LoginService;
-import com.company.Login.UserTypes;
-import com.company.Registration.Registration;
+import com.company.signIn.Login;
+import com.company.signIn.LoginImpl;
+import com.company.signUp.Registration;
 
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Process{

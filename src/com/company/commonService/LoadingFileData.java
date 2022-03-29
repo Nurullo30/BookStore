@@ -1,14 +1,13 @@
-package com.company;
+package com.company.commonService;
 
+import com.company.constants.Constants;
+import com.company.entities.Book;
 import com.company.shelves.*;
-import com.sun.xml.internal.ws.encoding.StringDataContentHandler;
-import jdk.nashorn.internal.parser.DateParser;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,18 +15,17 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
-import java.util.SimpleTimeZone;
 
-import static com.company.Constants.AMOUNT_LEFT_BOOK;
-import static com.company.Constants.AMOUNT_OF_BOOK;
-import static com.company.Constants.AUTHOR_OF_BOOK;
-import static com.company.Constants.BALANCE_PATH;
-import static com.company.Constants.BOOK_DATE;
-import static com.company.Constants.BOOK_LOAD_PATH;
-import static com.company.Constants.CUSTOMER_PATH;
-import static com.company.Constants.GENRE_OF_BOOK;
-import static com.company.Constants.PRICE_OF_BOOK;
-import static com.company.Constants.SHELVES;
+import static com.company.constants.Constants.AMOUNT_LEFT_BOOK;
+import static com.company.constants.Constants.AMOUNT_OF_BOOK;
+import static com.company.constants.Constants.AUTHOR_OF_BOOK;
+import static com.company.constants.Constants.BALANCE_PATH;
+import static com.company.constants.Constants.BOOK_DATE;
+import static com.company.constants.Constants.BOOK_LOAD_PATH;
+import static com.company.constants.Constants.CUSTOMER_PATH;
+import static com.company.constants.Constants.GENRE_OF_BOOK;
+import static com.company.constants.Constants.PRICE_OF_BOOK;
+import static com.company.constants.Constants.SHELVES;
 
 public class LoadingFileData{
     private HashMap<String , String> filePath = new HashMap<>();
@@ -69,7 +67,7 @@ public class LoadingFileData{
 
 
     public void loadFilePath(){
-        File file = new File("src/com/company/Directories/settings.txt");
+        File file = new File("src/com/company/directories/settings.txt");
         try {
             Scanner path= new Scanner(file);
 

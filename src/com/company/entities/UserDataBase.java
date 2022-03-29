@@ -1,9 +1,8 @@
-package com.company.DataBase;
+package com.company.entities;
 
-import com.company.Constants;
-import com.company.LoadingFileData;
-import com.company.Login.UserTypes;
-import com.company.Login.Users;
+import com.company.constants.Constants;
+import com.company.commonService.LoadingFileData;
+import com.company.commonService.UserTypes;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -14,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class UserDataBase implements UserDataManager{
+public class UserDataBase implements UserDataManager {
     private List<Users> usersList;
     private LoadingFileData loadingFileData;
     private String userPath;

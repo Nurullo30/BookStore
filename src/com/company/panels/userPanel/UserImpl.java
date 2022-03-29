@@ -1,24 +1,26 @@
-package com.company.Login.UserPanel;
+package com.company.panels.userPanel;
 
-import com.company.Constants;
-import com.company.DataBase.UserDataBase;
-import com.company.DataBase.UserDataManager;
-import com.company.Login.Users;
+import com.company.entities.Book;
+import com.company.panels.adminPanel.AdminService;
+import com.company.constants.Constants;
+import com.company.entities.UserDataBase;
+import com.company.entities.UserDataManager;
+import com.company.entities.Users;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
-public class UserMenuImpl implements UserMenuService{
+public class UserImpl implements UserService {
     private UserDataManager userDataBase;
     private Users currentUser;
     private final String [] userCredentials = new String[7];
     private String userId;
+    private AdminService bookStoreImpl;
 
-    public UserMenuImpl(String userId){
+    public UserImpl(String userId){
         this.userId = userId;
         userDataBase = new UserDataBase();
+        //bookStoreImpl = new BookStoreImpl();
         currentUser = new Users();
     }
 
@@ -62,6 +64,11 @@ public class UserMenuImpl implements UserMenuService{
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public List<Book> seeAllBooks() {
+       return bookStoreImpl.printAllBooks();
     }
 
 

@@ -1,6 +1,6 @@
-package com.company.Registration;
+package com.company.signUp;
 
-import com.company.Login.Users;
+import com.company.entities.Users;
 
 import java.util.List;
 

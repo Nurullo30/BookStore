@@ -1,6 +1,7 @@
-package com.company;
+package com.company.panels;
 
-import java.io.IOException;
+import com.company.entities.Book;
+
 import java.util.List;
 
 public class Validation {

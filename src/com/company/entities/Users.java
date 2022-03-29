@@ -1,7 +1,4 @@
-package com.company.Login;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.company.entities;
 
 public class Users {
     private String id;

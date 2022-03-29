@@ -1,6 +1,6 @@
-package com.company.Login;
+package com.company.signIn;
 
-import java.util.HashMap;
+import com.company.entities.Users;
 
 public interface LoginService {
 
@@ -9,6 +9,4 @@ public interface LoginService {
     String getUserId();
 
     Users getUser();
-
-
 }

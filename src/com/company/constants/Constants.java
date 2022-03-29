@@ -1,9 +1,4 @@
-package com.company;
-
-import org.omg.PortableInterceptor.SUCCESSFUL;
-
-import java.util.ArrayList;
-import java.util.List;
+package com.company.constants;
 
 public abstract class Constants {
     public static final String BOOK_LOAD_PATH = "loadBook";

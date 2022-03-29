@@ -1,10 +1,11 @@
-package com.company;
+package com.company.panels.adminPanel;
+
+import com.company.entities.Book;
 
 import java.io.IOException;
 import java.util.List;
 
-public interface BookStoreInterface {
-
+public interface AdminService {
 
     Book addBook(String name, String author, String genre, int price, int amount);
 

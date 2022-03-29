@@ -1,8 +1,7 @@
-package com.company.Login.AdminPanel;
+package com.company.panels.adminPanel;
 
-import com.company.Book;
-import com.company.BookStoreInterface;
-import com.company.Constants;
+import com.company.entities.Book;
+import com.company.constants.Constants;
 
 import java.io.IOException;
 import java.util.List;
@@ -10,11 +9,11 @@ import java.util.Scanner;
 
 public class AdminMenu {
     private Book book;
-    private BookStoreInterface bookStoreImpl;
+    private AdminService adminImpl;
     private List<Book> bookList;
     private boolean exitMenu;
-    public AdminMenu(BookStoreInterface service) {
-        bookStoreImpl = service;
+    public AdminMenu(AdminService service) {
+        adminImpl = new AdminImpl();
         init(); // showMenu
     }
 
@@ -114,7 +113,7 @@ public class AdminMenu {
             if (amount.equals("*"))
                 break;
 
-            book = bookStoreImpl.addBook(name, author, genre, Integer.parseInt(price), Integer.parseInt(amount));
+            book = adminImpl.addBook(name, author, genre, Integer.parseInt(price), Integer.parseInt(amount));
 
             System.out.println(book != null ? ("Успешно добавлена в базу! \n" + book +"\n") : ("Не удалось добавить книгу \n"));
 
@@ -171,7 +170,7 @@ public class AdminMenu {
     public void printAllBooks() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("List of our all books: ");
-        bookList = bookStoreImpl.printAllBooks();
+        bookList = adminImpl.printAllBooks();
         for (Book books : bookList) {
             System.out.println(books);
         }
@@ -189,7 +188,7 @@ public class AdminMenu {
     }
 
     public void removeBook() {
-        bookList = bookStoreImpl.printAllBooks();
+        bookList = adminImpl.printAllBooks();
         for (Book book: bookList) {
             System.out.println(book);
         }
@@ -198,7 +197,7 @@ public class AdminMenu {
         String bookId = scanner.nextLine();
         if (!(bookId.equals("*"))){
 
-            bookStoreImpl.removeBook(Integer.parseInt(bookId));
+            adminImpl.removeBook(Integer.parseInt(bookId));
             exitMenu = true;
             while (exitMenu) {
                 System.out.println("\n" + "Главное меню *");
@@ -214,7 +213,7 @@ public class AdminMenu {
     }
 
     public void changeDetails() throws IOException {
-        bookList = bookStoreImpl.printAllBooks();
+        bookList = adminImpl.printAllBooks();
         if (bookList != null && bookList.size() != 0) {
             Scanner scanner = new Scanner(System.in);
             while (true) {
@@ -225,7 +224,7 @@ public class AdminMenu {
                 String id = numCheck();
 
                 if (!id.equals("*")){
-                    if (bookStoreImpl.checkStatus(Integer.parseInt(id))) {
+                    if (adminImpl.checkStatus(Integer.parseInt(id))) {
                         System.out.println("Нажмите 1 чтобы изменить автора или 2 чтобы изменить название книги: ");
                         int num = scanner.nextInt();
                         switch (num) {
@@ -233,14 +232,14 @@ public class AdminMenu {
                                 System.out.println("Пожалуйста введите нового автора: ");
                                 scanner.nextLine();
                                 String author = scanner.nextLine();
-                                book = bookStoreImpl.changeDetails(Constants.AUTHOR, Integer.parseInt(id), author);
+                                book = adminImpl.changeDetails(Constants.AUTHOR, Integer.parseInt(id), author);
                                 System.out.println(book != null ? "Новый результат: " + book : "Мы не смогли сделать изменение");
                                 break;
                             case 2:
                                 System.out.println("Пожалуйста введите новое название: ");
                                 scanner.nextLine();
                                 String name = scanner.nextLine();
-                                book = bookStoreImpl.changeDetails(Constants.NAME, Integer.parseInt(id), name);
+                                book = adminImpl.changeDetails(Constants.NAME, Integer.parseInt(id), name);
                                 System.out.println(book != null ? "Новый результат: " + book : "Мы не смогли сделать изменение");
                                 break;
                             default:
@@ -262,7 +261,7 @@ public class AdminMenu {
         System.out.println("Пожалуйста напишите название или ключивое слово для поиска книги ? " + " / Главное меню *");
         String keyword = scanner.nextLine();
         if (!keyword.equals("*")){
-          bookList = bookStoreImpl.searchBook(keyword);
+          bookList = adminImpl.searchBook(keyword);
            if (bookList.size() != 0 && bookList != null){
                for (Book book: bookList) {
                    System.out.println(book);
@@ -297,7 +296,7 @@ public class AdminMenu {
         System.out.println();
         String genre = scanner.nextLine();
 
-        List<Book> bookGenre = bookStoreImpl.searchByGenre(genre);
+        List<Book> bookGenre = adminImpl.searchByGenre(genre);
         if (bookGenre != null){
             bookList(bookGenre);
         } else {
@@ -323,7 +322,7 @@ public class AdminMenu {
 
     public void printMostSold() {
         Scanner scanner = new Scanner(System.in);
-        bookStoreImpl.printMostSold();
+        adminImpl.printMostSold();
         exitMenu = true;
         System.out.println();
         while (exitMenu){
@@ -339,7 +338,7 @@ public class AdminMenu {
     }
 
     public void addDiscount(){
-        bookStoreImpl.addDiscount();
+        adminImpl.addDiscount();
     }
 
     public void createShelve(){
@@ -347,14 +346,14 @@ public class AdminMenu {
         System.out.println("Пожалуйста напишите название новой полка");
         String shelveType = scanner.nextLine();
 
-        bookStoreImpl.createShelve(shelveType);
+        adminImpl.createShelve(shelveType);
     }
 
     public void buyBook() {
         Scanner scanner = new Scanner(System.in);
         System.out.println("Название книги которую вы хотите купить: ");
         String bookName = scanner.nextLine();
-        List<Book> searchResult = bookStoreImpl.searchBook(bookName);
+        List<Book> searchResult = adminImpl.searchBook(bookName);
 
 
         if (searchResult != null && searchResult.size() != 0) {
@@ -370,7 +369,7 @@ public class AdminMenu {
                     System.out.println("Как вас зовут? ");
                     String userName = scanner.nextLine();
                     try {
-                        bookStoreImpl.saleBook(Integer.parseInt(bookId), userName, searchResult);
+                        adminImpl.saleBook(Integer.parseInt(bookId), userName, searchResult);
                     } catch (IOException e) {
                         e.printStackTrace();
                     }

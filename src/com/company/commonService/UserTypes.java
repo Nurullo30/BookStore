@@ -1,4 +1,4 @@
-package com.company.Login;
+package com.company.commonService;
 
 public enum UserTypes {
     ADMIN,

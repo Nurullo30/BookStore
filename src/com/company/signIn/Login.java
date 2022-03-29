@@ -1,12 +1,8 @@
-package com.company.Login.AdminPanel;
+package com.company.signIn;
 
-import com.company.Constants;
-import com.company.Login.LoginService;
-import com.company.Login.UserPanel.UserMenu;
-import com.company.Login.UserPanel.UserMenuImpl;
-import com.company.Login.UserPanel.UserMenuService;
-import com.company.Registration.RegistrationImpl;
-import com.company.Registration.RegistrationService;
+import com.company.constants.Constants;
+import com.company.panels.userPanel.UserMenu;
+import com.company.signIn.*;
 
 import java.util.Scanner;
 

@@ -1,20 +1,17 @@
-package com.company.Login.UserPanel;
+package com.company.panels.userPanel;
 
-import com.company.Book;
-import com.company.Constants;
-import com.company.Login.Users;
+import com.company.entities.Book;
+import com.company.constants.Constants;
+import com.company.entities.Users;
 
-import javax.jws.soap.SOAPBinding;
-import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class UserMenu {
-    private UserMenuService userMenuService;
+    private UserService userService;
 //    private final String myProfile= "Мой профиль";
     private final String newBooks= "Новые книги";
-    private final String seeAllBooks= "Посмотреть все книги";
+//    private final String seeAllBooks= "Посмотреть все книги";
     private final String seeByGenre= "Посмотреть по жанрам";
     private final String searchBook= "Искать";
     private final String buyBook= "Купить";
@@ -24,7 +21,7 @@ public class UserMenu {
     private String [] userCredentials;
 
     public UserMenu(String userId){
-        userMenuService = new UserMenuImpl(userId);
+        userService = new UserImpl(userId);
         mainMenu();
     }
 
@@ -34,7 +31,7 @@ public class UserMenu {
             System.out.println("Меню:");
             System.out.println("1." + "Мой профиль");
             System.out.println("2." + "Новые книги");
-            System.out.println("3." + seeAllBooks);
+            System.out.println("3." + "Посмотреть все книги");
             System.out.println("4." + seeByGenre);
             System.out.println("5." + searchBook);
             System.out.println("6." + buyBook);
@@ -48,6 +45,10 @@ public class UserMenu {
                     System.out.println("1." + "Мой профиль");
                     myProfile();
                     break;
+                case Constants.SEE_ALL_BOOKS:
+                    System.out.println("3." + "Посмотреть все книги");
+                    seeAllBooks();
+                    break;
                 default:
                     System.out.println("Не правильно ввели. Попробуйте еще раз!");
                     break;
@@ -60,7 +61,7 @@ public class UserMenu {
     }
 
     public void myProfile(){
-        userCredentials = userMenuService.userProfile();
+        userCredentials = userService.userProfile();
 
         System.out.println("1.ID: " + userCredentials[Constants.USER_ID]);
         System.out.println("2.Имя: " + userCredentials[Constants.USER_NAME]);
@@ -105,7 +106,7 @@ public class UserMenu {
                 System.out.println("На что хотели поменять?");
                 String newValue = scanner.nextLine();
 
-                userMenuService.changeCredentials(Integer.parseInt(oldValue), newValue);
+                userService.changeCredentials(Integer.parseInt(oldValue), newValue);
                 menuLoop= false;
                 break;
             } else if (oldValue.equals(exitSymbol)){
@@ -117,6 +118,30 @@ public class UserMenu {
         }
     }
 
+    public void seeAllBooks(){
+        List<Book> allBooks = userService.seeAllBooks();
+        for (Book book: allBooks) {
+            System.out.println(book);
+        }
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (true){
+            System.out.println("* Главное меню");
+            String exitSymbol = scanner.nextLine();
+
+            if (exitSymbol.equals("*"))
+                break;
+            else
+                System.out.println("Не правильно ввели. Попробуйте сного!");
+        }
+    }
+
+
+
+
+
+
 }
 
 
@@ -125,7 +150,7 @@ public class UserMenu {
 //        Scanner scanner = new Scanner(System.in);
 //        System.out.println("Название книги которую вы хотите купить: ");
 //        String bookName = scanner.nextLine();
-//        List<Book> searchResult = userMenuService.searchBook(bookName);
+//        List<Book> searchResult = userService.searchBook(bookName);
 //
 //
 //        if (searchResult != null && searchResult.size() != 0) {

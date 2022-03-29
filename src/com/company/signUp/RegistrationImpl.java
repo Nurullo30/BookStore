@@ -1,10 +1,10 @@
-package com.company.Registration;
+package com.company.signUp;
 
-import com.company.Constants;
-import com.company.DataBase.UserDataBase;
-import com.company.DataBase.UserDataManager;
-import com.company.Login.UserTypes;
-import com.company.Login.Users;
+import com.company.constants.Constants;
+import com.company.entities.UserDataBase;
+import com.company.entities.UserDataManager;
+import com.company.commonService.UserTypes;
+import com.company.entities.Users;
 
 import java.util.List;
 

@@ -1,7 +1,6 @@
-package com.company.DataBase;
+package com.company.entities;
 
-import com.company.Login.UserTypes;
-import com.company.Login.Users;
+import com.company.commonService.UserTypes;
 
 import java.io.IOException;
 import java.util.List;

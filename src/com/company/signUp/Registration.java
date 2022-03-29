@@ -1,6 +1,6 @@
-package com.company.Registration;
+package com.company.signUp;
 
-import com.company.Constants;
+import com.company.constants.Constants;
 
 import java.util.Scanner;
 
