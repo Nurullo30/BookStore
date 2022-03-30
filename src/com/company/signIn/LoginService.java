@@ -4,7 +4,7 @@ import com.company.entities.Users;
 
 public interface LoginService {
 
-    String checkForUser(String login, String password);
+    Users checkForUser(String login, String password);
 
     String getUserId();
 

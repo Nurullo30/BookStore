@@ -3,7 +3,7 @@ package com.company.signUp;
 import com.company.constants.Constants;
 import com.company.entities.UserDataBase;
 import com.company.entities.UserDataManager;
-import com.company.commonService.UserTypes;
+import com.company.commonService.UserRole;
 import com.company.entities.Users;
 
 import java.util.List;
@@ -20,7 +20,7 @@ public class RegistrationImpl implements RegistrationService{
             if (name != null && surname != null && age != null){
                 Users user = new Users("U"+(userDataBase.getUsers().size() + 1), name, surname, age , login , password);
 
-                String addUser = userDataBase.addNewUser(user, UserTypes.USER);
+                String addUser = userDataBase.addNewUser(user, UserRole.USER);
                 if (addUser.equals(Constants.SUCCESSFUL)){
                     return Constants.SUCCESSFUL;
                 }

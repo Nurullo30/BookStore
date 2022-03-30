@@ -20,8 +20,8 @@ public class UserMenu {
     private final String news= "Новости";
     private String [] userCredentials;
 
-    public UserMenu(String userId){
-        userService = new UserImpl(userId);
+    public UserMenu(Users user){
+        userService = new UserImpl(user.getId());
         mainMenu();
     }
 

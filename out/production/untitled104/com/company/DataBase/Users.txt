@@ -1,1 +1,2 @@
-1:U1:Nurullo:Abdurakhmanov:24:1:1
+1:U1:Nurullo:Abdurakhmanov:24:1:1:ADMIN
+2:U2:asd:as:123:asd:asd:USER

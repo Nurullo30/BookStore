@@ -7,12 +7,10 @@ import com.company.signUp.Registration;
 import java.util.Scanner;
 
 public class Process{
-    private UserTypes userTypes;
     private Scanner scanner;
     private Registration registration;
 
     public Process(){
-        userTypes = UserTypes.GUEST;
         mainMenu();
     }
 

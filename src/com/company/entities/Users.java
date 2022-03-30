@@ -1,5 +1,7 @@
 package com.company.entities;
 
+import com.company.commonService.UserRole;
+
 public class Users {
     private String id;
     private String name;
@@ -7,6 +9,7 @@ public class Users {
     private String age;
     private String login;
     private String password;
+    private UserRole userRole;
 
     public Users(String id, String name, String surname, String age, String login, String password) {
         this.id = id;
@@ -15,6 +18,7 @@ public class Users {
         this.age = age;
         this.login = login;
         this.password = password;
+        this.userRole = userRole;
     }
 
     public Users(){
@@ -68,5 +72,13 @@ public class Users {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public UserRole getUserRole() {
+        return userRole;
+    }
+
+    public void setUserRole(UserRole userRole) {
+        this.userRole = userRole;
     }
 }

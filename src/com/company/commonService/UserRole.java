@@ -1,6 +1,6 @@
 package com.company.commonService;
 
-public enum UserTypes {
+public enum UserRole {
     ADMIN,
     USER,
     GUEST

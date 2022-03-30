@@ -19,17 +19,26 @@ public class LoginImpl implements LoginService {
     }
 
     @Override
-    public String checkForUser(String login, String password) {
-        usersList = userDataBase.getUsers();
+    public Users checkForUser(String login, String password) {
+        Users user  = new Users();
+        user = userDataBase.checkForUser(login,password);
+        if (user != null)
+            return user;
 
-        for (Users user: usersList) {
-            if (user.getLogin().equals(login) && user.getPassword().equals(password)){
-                userId = user.getId();
-                return user.getId();
-            }
-        }
-        return Constants.FAILED;
+        return null;
     }
+
+
+//        usersList = userDataBase.getUsers();
+//
+//        for (Users user: usersList) {
+//            if (user.getLogin().equals(login) && user.getPassword().equals(password)){
+//                userId = user.getId();
+//                return user.getId();
+//            }
+//        }
+//        return Constants.FAILED;
+
 
     public String getUserId() {
         return userId;

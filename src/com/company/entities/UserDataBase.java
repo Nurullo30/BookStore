@@ -2,7 +2,7 @@ package com.company.entities;
 
 import com.company.constants.Constants;
 import com.company.commonService.LoadingFileData;
-import com.company.commonService.UserTypes;
+import com.company.commonService.UserRole;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -17,7 +17,6 @@ public class UserDataBase implements UserDataManager {
     private List<Users> usersList;
     private LoadingFileData loadingFileData;
     private String userPath;
-    private Users users;
 
     public UserDataBase(){
         usersList = new ArrayList<>();
@@ -34,9 +33,9 @@ public class UserDataBase implements UserDataManager {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        users = new Users();
     }
-    public String addNewUser(Users user, UserTypes userType){
+    public String addNewUser(Users user, UserRole userRole){
+        user.setUserRole(userRole);
         usersList.add(user);
         try {
             exportUsers();
@@ -49,28 +48,46 @@ public class UserDataBase implements UserDataManager {
 
     public void exportUsers() throws IOException {
        FileWriter fileWriter = new FileWriter(userPath);
+        int order = 1;
         for (Users user: usersList) {
-            int order = 1;
+
             fileWriter.write(order++ + ":" + user.getId() + ":" + user.getName() + ":" + user.getSurname()
-                    + ":" + user.getAge() + ":" + user.getLogin() + ":" + user.getPassword() + "\n");
+                    + ":" + user.getAge() + ":" + user.getLogin() + ":" + user.getPassword() + ":" + user.getUserRole().toString() + "\n");
         }
         fileWriter.flush();
         fileWriter.close();
-
     }
 
     public void importUsers() throws FileNotFoundException {
         File file = new File(userPath);
         Scanner scanner = new Scanner(file);
         while (scanner.hasNextLine()){
+
             String user = scanner.nextLine();
             String [] usersArr = user.split(":");
-            usersList.add(new Users(usersArr[Constants.USER_ID],usersArr[Constants.USER_NAME],usersArr[Constants.USER_SURNAME],
-                    usersArr[Constants.USER_AGE], usersArr[Constants.USER_LOGIN], usersArr[Constants.USER_PASSWORD]));
+
+            Users newUser = new Users (usersArr[Constants.USER_ID],usersArr[Constants.USER_NAME],usersArr[Constants.USER_SURNAME],
+                    usersArr[Constants.USER_AGE], usersArr[Constants.USER_LOGIN], usersArr[Constants.USER_PASSWORD]);
+            if (usersArr[Constants.USES_ROLE].equals(UserRole.USER.toString()) && !usersArr[Constants.USES_ROLE].isEmpty()){
+                newUser.setUserRole(UserRole.USER);
+            } else if (usersArr[Constants.USES_ROLE].equals(UserRole.ADMIN.toString()) && !usersArr[Constants.USES_ROLE].isEmpty()){
+                newUser.setUserRole(UserRole.ADMIN);
+            }
+
+            usersList.add(newUser);
         }
     }
 
     public List<Users> getUsers() {
         return usersList;
+    }
+
+    public Users checkForUser(String login ,String password){
+        for (Users user: usersList) {
+            if (user.getLogin().equals(login) && user.getPassword().equals(password)){
+                return user;
+            }
+        }
+        return null;
     }
 }

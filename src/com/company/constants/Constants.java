@@ -29,6 +29,7 @@ public abstract class Constants {
     public final static int USER_AGE = 4;
     public final static int USER_LOGIN = 5;
     public final static int USER_PASSWORD = 6;
+    public final static int USES_ROLE = 7;
 
 
     public final static int MY_PROFILE = 1;
