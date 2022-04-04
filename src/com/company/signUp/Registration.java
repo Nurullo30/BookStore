@@ -1,6 +1,5 @@
 package com.company.signUp;
 
-import com.company.NumericValue;
 import com.company.StringValue;
 import com.company.constants.Constants;
 
@@ -17,61 +16,80 @@ public class Registration {
 
     public void startMenu(){
         System.out.println(StringValue.WELCOME_REG + " "
-                + NumericValue.ONE + " "  + StringValue.START + " / "
-                + NumericValue.STAR + " " + StringValue.MAIN_MENU);
-        Boolean check = true;
-        while (check){
+                + StringValue.ONE + " "  + StringValue.START + " / "
+                + StringValue.STAR + " " + StringValue.MAIN_MENU);
+        Boolean UserInMenu = true;
+        while (UserInMenu){
             String choose = scanner.nextLine();
+
             switch(choose){
-                case "1":
-                    System.out.println("1.Регистрация");
-                        startReg();
-                        check = false;
-                        break;
-                case "*":
-                    check = false;
+                case StringValue.ONE:
+                    System.out.println(StringValue.SIGN_UP);
+                    startReg();
+                    UserInMenu = false;
+                    break;
+                case StringValue.STAR:
+                    UserInMenu = false;
                     break;
                 default:
-                    System.out.println("Вы неправильно ввели. Попровуйте еще раз");
+                    System.out.println(StringValue.TRY_AGAIN);
                     break;
             }
         }
     }
 
     public void startReg() {
-        boolean check = true;
-        while(check){
-            System.out.println("Имя: ");
+        boolean UserInRegMenu = true;
+        while(UserInRegMenu){
+            System.out.println(StringValue.NAME + ":");
             String name = scanner.nextLine();
 
-            System.out.println("Фамилия: ");
+            System.out.println(StringValue.SURNAME + ":");
             String surname = scanner.nextLine();
-            int age;
-            try {
-                System.out.println("Возрасть: ");
-                age = scanner.nextInt();
-            } catch (Exception e){
-                System.out.println(StringValue.TRY_AGAIN);
-                break;
+            int age = 0;
+
+            boolean ageCheck = true;
+
+            while(ageCheck){
+                Scanner ageScanner = new Scanner(System.in);
+                System.out.println(StringValue.AGE + ":");
+                try {
+                    age = ageScanner.nextInt();
+                    ageCheck = false;
+                } catch (Exception e){
+                    System.out.println(StringValue.TRY_AGAIN);
+                }
             }
-            scanner.nextLine();
-            System.out.println("Логин: ");
+
+            System.out.println(StringValue.LOGIN);
             String login = scanner.nextLine();
-            System.out.println("Пароль: ");
+            System.out.println(StringValue.PASSWORD);
             String password = scanner.nextLine();
 
             String regStatus  = registrationService.registration(name, surname, String.valueOf(age), login , password);
 
-            if (regStatus.equals( Constants.SUCCESSFUL)){
-                System.out.println("Вы успешно зарегистрировались! :)");
-                check = false;
-                break;
+
+            if (regStatus.equals(Constants.SUCCESSFUL)){
+                System.out.println(StringValue.REGISTRATION_SUCCESS);
+
+                boolean exitCheck = true;
+                while (exitCheck){
+                    System.out.println(StringValue.STAR + " " + StringValue.MAIN_MENU);
+                    String mainMenuNum = scanner.nextLine();
+
+                    if (mainMenuNum.equals(StringValue.STAR)){
+                        UserInRegMenu = false;
+                        exitCheck = false;
+                        break;
+                    } else {
+                        System.out.println(StringValue.TRY_AGAIN);
+                    }
+                }
             } else if (regStatus.equals(Constants.FAILED)){
-                System.out.println("Регистрация не прошло успешно! :( ");
-                check = false;
+                System.out.println(StringValue.REGISTRATION_FAIL);
+                UserInRegMenu = false;
                 break;
             }
         }
     }
-
 }

@@ -3,37 +3,34 @@ package com.company.commonService;
 import com.company.NumericValue;
 import com.company.StringValue;
 import com.company.signIn.Login;
-import com.company.signIn.LoginImpl;
 import com.company.signUp.Registration;
-import com.company.signUp.RegistrationImpl;
-import com.company.signUp.RegistrationService;
 
 import java.util.Scanner;
 
 public class Process{
     private Scanner scanner;
     private Registration registration;
-    private RegistrationService registrationService;
+    private Login login;
 
-    public Process(RegistrationService registrationService, Registration registration){
-       this.registrationService = registrationService;
+    public Process(Registration registration, Login login){
        this.registration = registration;
+       this.login = login;
        scanner = new Scanner(System.in);
     }
 
     public void startMainMenu(){
-        boolean isUserInMenu = true;
+        boolean UserInMenu = true;
         System.out.println(StringValue.WELCOME_BOOKSTORE);
-        while (isUserInMenu){
+        while (UserInMenu){
             System.out.println(NumericValue.ONE + " " + StringValue.SIGN_IN +
                         " "  + NumericValue.TWO + " " + StringValue.SIGN_UP);
 
-            int menuNumber = scanner.nextInt(); //change name
+            int menuNumber = scanner.nextInt();
             switch (menuNumber){
                 case 1:
                     System.out.println(NumericValue.ONE + " " + StringValue.SIGN_IN);
                     authorizeUser();
-                    isUserInMenu = false;
+                    UserInMenu = false;
                     break;
                 case 2:
                     System.out.println(NumericValue.TWO + " " + StringValue.SIGN_UP);
@@ -46,6 +43,6 @@ public class Process{
     }
 
     public void authorizeUser(){
-        Login login = new Login(new LoginImpl());
+       login.loginMenu();
     }
 }

@@ -34,6 +34,9 @@ public class UserDataBase implements UserDataManager {
             e.printStackTrace();
         }
     }
+
+
+
     public String addNewUser(Users user, UserRole userRole){
         user.setUserRole(userRole);
         usersList.add(user);

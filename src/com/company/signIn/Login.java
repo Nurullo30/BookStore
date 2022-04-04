@@ -10,15 +10,13 @@ import com.company.signIn.*;
 import java.util.Scanner;
 
 public class Login {
-    private LoginService loginImpl;
+    private LoginService loginService;
     private UserMenu userMenu;
     private AdminMenu adminMenu;
     private Users user;
 
     public Login(LoginService loginService){
-        loginImpl = loginService;
-        loginMenu();
-
+        loginService = loginService;
     }
 
     public void loginMenu(){
@@ -32,7 +30,7 @@ public class Login {
             String password = scanner.nextLine();
 
             Users user = new Users();
-            user = loginImpl.checkForUser(login, password);
+            user = loginService.checkForUser(login, password);
 
             if (user != null && user.getUserRole().equals(UserRole.USER)){
                 userMenu = new UserMenu(user);
