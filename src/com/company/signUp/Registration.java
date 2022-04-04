@@ -1,20 +1,24 @@
 package com.company.signUp;
 
+import com.company.NumericValue;
+import com.company.StringValue;
 import com.company.constants.Constants;
 
 import java.util.Scanner;
 
 public class Registration {
     RegistrationService registrationService;
-    public Registration(){
-        registrationService = new RegistrationImpl();
-        mainMenu();
+    Scanner scanner;
+
+    public Registration(RegistrationService registrationService){
+        this.registrationService = registrationService;
+        scanner = new Scanner(System.in);
     }
 
-    public void mainMenu(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Добро пожаловать в регистрационную форму." + " 1. Начать / *. Вернуться обратно в главное меню");
-
+    public void startMenu(){
+        System.out.println(StringValue.WELCOME_REG + " "
+                + NumericValue.ONE + " "  + StringValue.START + " / "
+                + NumericValue.STAR + " " + StringValue.MAIN_MENU);
         Boolean check = true;
         while (check){
             String choose = scanner.nextLine();
@@ -35,7 +39,6 @@ public class Registration {
     }
 
     public void startReg() {
-        Scanner scanner = new Scanner(System.in);
         boolean check = true;
         while(check){
             System.out.println("Имя: ");
@@ -48,8 +51,7 @@ public class Registration {
                 System.out.println("Возрасть: ");
                 age = scanner.nextInt();
             } catch (Exception e){
-                System.out.println("Пожалуйста введите число");
-
+                System.out.println(StringValue.TRY_AGAIN);
                 break;
             }
             scanner.nextLine();

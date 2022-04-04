@@ -119,7 +119,7 @@ public class UserMenu {
     }
 
     public void seeAllBooks(){
-        List<Book> allBooks = userService.seeAllBooks();
+        List<Book> allBooks = userService.printAllBooks();
         for (Book book: allBooks) {
             System.out.println(book);
         }

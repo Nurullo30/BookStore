@@ -1,6 +1,7 @@
 package com.company.panels.userPanel;
 
 import com.company.entities.Book;
+import com.company.panels.BookStoreImpl;
 import com.company.panels.adminPanel.AdminService;
 import com.company.constants.Constants;
 import com.company.entities.UserDataBase;
@@ -10,17 +11,15 @@ import com.company.entities.Users;
 import java.io.IOException;
 import java.util.List;
 
-public class UserImpl implements UserService {
+public class UserImpl extends BookStoreImpl implements UserService {
     private UserDataManager userDataBase;
     private Users currentUser;
     private final String [] userCredentials = new String[7];
     private String userId;
-    private AdminService bookStoreImpl;
 
     public UserImpl(String userId){
         this.userId = userId;
         userDataBase = new UserDataBase();
-        //bookStoreImpl = new BookStoreImpl();
         currentUser = new Users();
     }
 
@@ -64,11 +63,6 @@ public class UserImpl implements UserService {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    @Override
-    public List<Book> seeAllBooks() {
-       return bookStoreImpl.printAllBooks();
     }
 
 
