@@ -1,12 +1,12 @@
 package com.company.signIn;
 
-import com.company.entities.Users;
+import com.company.entities.User;
 
 public interface LoginService {
 
-    Users checkForUser(String login, String password);
+    User checkForUser(String login, String password);
 
     String getUserId();
 
-    Users getUser();
+    User getUser();
 }

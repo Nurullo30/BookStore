@@ -2,7 +2,7 @@ package com.company.panels.userPanel;
 
 import com.company.entities.Book;
 import com.company.constants.Constants;
-import com.company.entities.Users;
+import com.company.entities.User;
 
 import java.util.List;
 import java.util.Scanner;
@@ -20,7 +20,7 @@ public class UserMenu {
     private final String news= "Новости";
     private String [] userCredentials;
 
-    public UserMenu(Users user){
+    public UserMenu(User user){
         userService = new UserImpl(user.getId());
         mainMenu();
     }
@@ -55,7 +55,7 @@ public class UserMenu {
             }
         }
     }
-    public void welcomeUser(Users user){
+    public void welcomeUser(User user){
         System.out.println("Добро пожаловать," + user.getName() + " " + user.getSurname() + "!");
         System.out.println("Your id is " + user.getId());
     }

@@ -1,32 +1,30 @@
 package com.company.panels.userPanel;
 
-import com.company.entities.Book;
+import com.company.entities.User;
 import com.company.panels.BookStoreImpl;
-import com.company.panels.adminPanel.AdminService;
 import com.company.constants.Constants;
 import com.company.entities.UserDataBase;
 import com.company.entities.UserDataManager;
-import com.company.entities.Users;
 
 import java.io.IOException;
 import java.util.List;
 
 public class UserImpl extends BookStoreImpl implements UserService {
     private UserDataManager userDataBase;
-    private Users currentUser;
+    private User currentUser;
     private final String [] userCredentials = new String[7];
     private String userId;
 
     public UserImpl(String userId){
         this.userId = userId;
         userDataBase = new UserDataBase();
-        currentUser = new Users();
+        currentUser = new User();
     }
 
     @Override
     public String[] userProfile() {
-        List<Users> usersList = userDataBase.getUsers();
-        for (Users user: usersList) {
+        List<User> userList = userDataBase.getUsers();
+        for (User user: userList) {
             if (user.getId().equals(userId)){
                 currentUser = user;
                 userCredentials[Constants.USER_ID] = user.getId();

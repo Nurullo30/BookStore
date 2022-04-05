@@ -31,6 +31,9 @@ public class StringValue {
     public static final String LOGIN =  "Логин";
     public static final String PASSWORD =  "Пароль";
 
+    public static final String USER_EXIST = "Пользователь сушествует";
+    public static final String LOGIN_FREE = "Логин свободный";
+
 
 
 

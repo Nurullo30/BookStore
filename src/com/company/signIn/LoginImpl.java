@@ -1,26 +1,25 @@
 package com.company.signIn;
 
 
-import com.company.constants.Constants;
+import com.company.entities.User;
 import com.company.entities.UserDataBase;
-import com.company.entities.Users;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LoginImpl implements LoginService {
-    private List<Users> usersList;
+    private List<User> userList;
     private String userId;
     UserDataBase userDataBase;
 
     public LoginImpl() {
-        usersList = new ArrayList<>();
+        userList = new ArrayList<>();
         userDataBase = new UserDataBase();
     }
 
     @Override
-    public Users checkForUser(String login, String password) {
-        Users user  = new Users();
+    public User checkForUser(String login, String password) {
+        User user  = new User();
         user = userDataBase.checkForUser(login,password);
         if (user != null)
             return user;
@@ -29,9 +28,9 @@ public class LoginImpl implements LoginService {
     }
 
 
-//        usersList = userDataBase.getUsers();
+//        userList = userDataBase.getUsers();
 //
-//        for (Users user: usersList) {
+//        for (User user: userList) {
 //            if (user.getLogin().equals(login) && user.getPassword().equals(password)){
 //                userId = user.getId();
 //                return user.getId();
@@ -44,8 +43,8 @@ public class LoginImpl implements LoginService {
         return userId;
     }
 
-    public Users getUser(){
-        for (Users user: usersList) {
+    public User getUser(){
+        for (User user: userList) {
             if (user.getId().equals(userId) && userId != null){
                 return user;
             }

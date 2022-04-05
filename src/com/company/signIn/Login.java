@@ -1,11 +1,9 @@
 package com.company.signIn;
 
 import com.company.commonService.UserRole;
-import com.company.constants.Constants;
-import com.company.entities.Users;
+import com.company.entities.User;
 import com.company.panels.adminPanel.AdminMenu;
 import com.company.panels.userPanel.UserMenu;
-import com.company.signIn.*;
 
 import java.util.Scanner;
 
@@ -13,7 +11,7 @@ public class Login {
     private LoginService loginService;
     private UserMenu userMenu;
     private AdminMenu adminMenu;
-    private Users user;
+    private User user;
 
     public Login(LoginService loginService){
         loginService = loginService;
@@ -29,7 +27,7 @@ public class Login {
             System.out.println("Пароль:");
             String password = scanner.nextLine();
 
-            Users user = new Users();
+            User user = new User();
             user = loginService.checkForUser(login, password);
 
             if (user != null && user.getUserRole().equals(UserRole.USER)){

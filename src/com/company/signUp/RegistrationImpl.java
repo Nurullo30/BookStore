@@ -1,34 +1,47 @@
 package com.company.signUp;
 
+import com.company.StringValue;
+import com.company.UserInfoType;
+import com.company.Validation;
 import com.company.constants.Constants;
+import com.company.entities.User;
 import com.company.entities.UserDataBase;
 import com.company.entities.UserDataManager;
 import com.company.commonService.UserRole;
-import com.company.entities.Users;
-
 import java.util.List;
 
 public class RegistrationImpl implements RegistrationService{
-    private final UserDataManager userDataBase;
+    private UserDataManager userDataBase;
+    private Validation validation;
 
     public RegistrationImpl(){
         userDataBase = new UserDataBase();
+        validation = new Validation();
     }
 
     @Override
     public String registration(String name, String surname, String age, String login, String password) {
-            if (name != null && surname != null && age != null){
-                Users user = new Users("U"+(userDataBase.getUsers().size() + 1), name, surname, age , login , password);
 
-                String addUser = userDataBase.addNewUser(user, UserRole.USER);
-                if (addUser.equals(Constants.SUCCESSFUL)){
-                    return Constants.SUCCESSFUL;
-                }
-            }
-        return Constants.FAILED;
+        User user = new User("U" + (getAllUsers().size() + 1), name, surname, age, login, password);
+
+        String newUser = userDataBase.addNewUser(user, UserRole.USER);
+
+        if (newUser.equals(Constants.SUCCESSFUL)) {
+            return Constants.SUCCESSFUL;
+        } else
+            return Constants.FAILED;
     }
 
-    public List <Users> getAllUsers(){
+    public Boolean checkUserExist(String detail, UserInfoType userInfoType){
+        if (validation.checkUserExist(detail, userInfoType).equals(StringValue.LOGIN_FREE)){
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public List <User> getAllUsers(){
        return userDataBase.getUsers();
     }
 

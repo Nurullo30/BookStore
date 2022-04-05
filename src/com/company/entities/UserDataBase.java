@@ -14,12 +14,12 @@ import java.util.List;
 import java.util.Scanner;
 
 public class UserDataBase implements UserDataManager {
-    private List<Users> usersList;
+    private List<User> userList;
     private LoadingFileData loadingFileData;
     private String userPath;
 
     public UserDataBase(){
-        usersList = new ArrayList<>();
+        userList = new ArrayList<>();
         init();
     }
 
@@ -37,9 +37,9 @@ public class UserDataBase implements UserDataManager {
 
 
 
-    public String addNewUser(Users user, UserRole userRole){
+    public String addNewUser(User user, UserRole userRole){
         user.setUserRole(userRole);
-        usersList.add(user);
+        userList.add(user);
         try {
             exportUsers();
         } catch (IOException e) {
@@ -52,7 +52,7 @@ public class UserDataBase implements UserDataManager {
     public void exportUsers() throws IOException {
        FileWriter fileWriter = new FileWriter(userPath);
         int order = 1;
-        for (Users user: usersList) {
+        for (User user: userList) {
 
             fileWriter.write(order++ + ":" + user.getId() + ":" + user.getName() + ":" + user.getSurname()
                     + ":" + user.getAge() + ":" + user.getLogin() + ":" + user.getPassword() + ":" + user.getUserRole().toString() + "\n");
@@ -69,7 +69,7 @@ public class UserDataBase implements UserDataManager {
             String user = scanner.nextLine();
             String [] usersArr = user.split(":");
 
-            Users newUser = new Users (usersArr[Constants.USER_ID],usersArr[Constants.USER_NAME],usersArr[Constants.USER_SURNAME],
+            User newUser = new User(usersArr[Constants.USER_ID],usersArr[Constants.USER_NAME],usersArr[Constants.USER_SURNAME],
                     usersArr[Constants.USER_AGE], usersArr[Constants.USER_LOGIN], usersArr[Constants.USER_PASSWORD]);
             if (usersArr[Constants.USES_ROLE].equals(UserRole.USER.toString()) && !usersArr[Constants.USES_ROLE].isEmpty()){
                 newUser.setUserRole(UserRole.USER);
@@ -77,16 +77,16 @@ public class UserDataBase implements UserDataManager {
                 newUser.setUserRole(UserRole.ADMIN);
             }
 
-            usersList.add(newUser);
+            userList.add(newUser);
         }
     }
 
-    public List<Users> getUsers() {
-        return usersList;
+    public List<User> getUsers() {
+        return userList;
     }
 
-    public Users checkForUser(String login ,String password){
-        for (Users user: usersList) {
+    public User checkForUser(String login , String password){
+        for (User user: userList) {
             if (user.getLogin().equals(login) && user.getPassword().equals(password)){
                 return user;
             }

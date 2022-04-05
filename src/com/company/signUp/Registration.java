@@ -1,6 +1,7 @@
 package com.company.signUp;
 
 import com.company.StringValue;
+import com.company.UserInfoType;
 import com.company.constants.Constants;
 
 import java.util.Scanner;
@@ -39,8 +40,8 @@ public class Registration {
     }
 
     public void startReg() {
-        boolean UserInRegMenu = true;
-        while(UserInRegMenu){
+        boolean userInRegMenu = true;
+        while(userInRegMenu){
             System.out.println(StringValue.NAME + ":");
             String name = scanner.nextLine();
 
@@ -61,8 +62,22 @@ public class Registration {
                 }
             }
 
-            System.out.println(StringValue.LOGIN);
-            String login = scanner.nextLine();
+            String login ="";
+            boolean loginCheck = true;
+            while (loginCheck){
+                System.out.println(StringValue.LOGIN);
+                login = scanner.nextLine();
+
+                boolean loginExist = registrationService.checkUserExist(login, UserInfoType.LOGIN);
+
+                if (loginExist){
+                    loginCheck = false;
+                    break;
+                } else {
+                    System.out.println(StringValue.USER_EXIST);
+                }
+            }
+
             System.out.println(StringValue.PASSWORD);
             String password = scanner.nextLine();
 
@@ -71,25 +86,33 @@ public class Registration {
 
             if (regStatus.equals(Constants.SUCCESSFUL)){
                 System.out.println(StringValue.REGISTRATION_SUCCESS);
-
-                boolean exitCheck = true;
-                while (exitCheck){
-                    System.out.println(StringValue.STAR + " " + StringValue.MAIN_MENU);
-                    String mainMenuNum = scanner.nextLine();
-
-                    if (mainMenuNum.equals(StringValue.STAR)){
-                        UserInRegMenu = false;
-                        exitCheck = false;
-                        break;
-                    } else {
-                        System.out.println(StringValue.TRY_AGAIN);
-                    }
-                }
             } else if (regStatus.equals(Constants.FAILED)){
                 System.out.println(StringValue.REGISTRATION_FAIL);
-                UserInRegMenu = false;
+                userInRegMenu = false;
                 break;
             }
+
+
+            while (true){
+                System.out.println(StringValue.STAR + " " + StringValue.MAIN_MENU);
+                String mainMenuNum = scanner.nextLine();
+
+                boolean exit = exitMenu(mainMenuNum);
+
+                if (exit){
+                    userInRegMenu = false;
+                    break;
+                } else {
+                    System.out.println(StringValue.TRY_AGAIN);
+                }
+            }
         }
+    }
+
+    public boolean exitMenu(String exitValue){
+        if (exitValue.equals(StringValue.STAR)){
+            return true;
+        } else
+        return false;
     }
 }

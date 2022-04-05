@@ -2,7 +2,7 @@ package com.company.entities;
 
 import com.company.commonService.UserRole;
 
-public class Users {
+public class User {
     private String id;
     private String name;
     private String surname;
@@ -11,7 +11,7 @@ public class Users {
     private String password;
     private UserRole userRole;
 
-    public Users(String id, String name, String surname, String age, String login, String password) {
+    public User(String id, String name, String surname, String age, String login, String password) {
         this.id = id;
         this.name = name;
         this.surname = surname;
@@ -21,7 +21,7 @@ public class Users {
         this.userRole = userRole;
     }
 
-    public Users(){
+    public User(){
 
     }
 

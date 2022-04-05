@@ -6,9 +6,9 @@ import java.io.IOException;
 import java.util.List;
 
 public interface UserDataManager {
-    List<Users> getUsers();
+    List<User> getUsers();
 
     void exportUsers() throws IOException;
 
-    String addNewUser(Users user, UserRole userType);
+    String addNewUser(User user, UserRole userType);
 }

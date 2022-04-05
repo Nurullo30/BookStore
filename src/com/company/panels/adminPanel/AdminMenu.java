@@ -2,7 +2,7 @@ package com.company.panels.adminPanel;
 
 import com.company.entities.Book;
 import com.company.constants.Constants;
-import com.company.entities.Users;
+import com.company.entities.User;
 
 import java.io.IOException;
 import java.util.List;
@@ -13,7 +13,7 @@ public class AdminMenu {
     private AdminService adminImpl;
     private List<Book> bookList;
     private boolean exitMenu;
-    public AdminMenu(Users user) {
+    public AdminMenu(User user) {
         adminImpl = new AdminImpl();
         init(); // showMenu
     }
