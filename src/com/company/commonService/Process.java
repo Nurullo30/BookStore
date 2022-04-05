@@ -43,6 +43,6 @@ public class Process{
     }
 
     public void authorizeUser(){
-       login.loginMenu();
+       login.checkUser();
     }
 }

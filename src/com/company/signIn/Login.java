@@ -17,7 +17,7 @@ public class Login {
         loginService = loginService;
     }
 
-    public void loginMenu(){
+    public void checkUser(){
         Scanner scanner = new Scanner(System.in);
         System.out.println("Добро пожаловать! Пожалуйста введите логин и пароль");
         while (true){
