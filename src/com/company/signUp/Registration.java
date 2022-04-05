@@ -15,30 +15,6 @@ public class Registration {
         scanner = new Scanner(System.in);
     }
 
-    public void startMenu(){
-        System.out.println(StringValue.WELCOME_REG + " "
-                + StringValue.ONE + " "  + StringValue.START + " / "
-                + StringValue.STAR + " " + StringValue.MAIN_MENU);
-        Boolean UserInMenu = true;
-        while (UserInMenu){
-            String choose = scanner.nextLine();
-
-            switch(choose){
-                case StringValue.ONE:
-                    System.out.println(StringValue.SIGN_UP);
-                    startReg();
-                    UserInMenu = false;
-                    break;
-                case StringValue.STAR:
-                    UserInMenu = false;
-                    break;
-                default:
-                    System.out.println(StringValue.TRY_AGAIN);
-                    break;
-            }
-        }
-    }
-
     public void startReg() {
         boolean userInRegMenu = true;
         while(userInRegMenu){

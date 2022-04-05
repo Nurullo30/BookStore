@@ -34,7 +34,7 @@ public class Process{
                     break;
                 case 2:
                     System.out.println(NumericValue.TWO + " " + StringValue.SIGN_UP);
-                    registration.startMenu();
+                    registration.startReg();
                     break;
                 default:
                     System.out.println(StringValue.TRY_AGAIN);
