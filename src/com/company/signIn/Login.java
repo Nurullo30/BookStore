@@ -11,10 +11,11 @@ public class Login {
     private LoginService loginService;
     private UserMenu userMenu;
     private AdminMenu adminMenu;
-    private User user;
 
-    public Login(LoginService loginService){
-        loginService = loginService;
+    public Login(LoginService loginService, UserMenu userMenu, AdminMenu adminMenu){
+        this.loginService = loginService;
+        this.userMenu = userMenu;
+        this.adminMenu = adminMenu;
     }
 
     public void checkUser(){
@@ -27,14 +28,14 @@ public class Login {
             System.out.println("Пароль:");
             String password = scanner.nextLine();
 
-            User user = new User();
-            user = loginService.checkForUser(login, password);
+            User user = loginService.checkForUser(login, password);
 
             if (user != null && user.getUserRole().equals(UserRole.USER)){
-                userMenu = new UserMenu(user);
+                userMenu.setUser(user);
+                userMenu.startMenu();
                 break;
             } else if (user != null && user.getUserRole().equals(UserRole.ADMIN)){
-                adminMenu = new AdminMenu(user);
+                adminMenu.startMenu();
                 break;
             } else {
                 System.out.println("Не правильно ввели. Пожалуйста проверьте еще раз! \n");

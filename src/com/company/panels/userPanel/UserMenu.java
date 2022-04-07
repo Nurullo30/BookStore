@@ -1,5 +1,7 @@
 package com.company.panels.userPanel;
 
+import com.company.constants.CommonConstants;
+import com.company.constants.UserConstants;
 import com.company.entities.Book;
 import com.company.constants.Constants;
 import com.company.entities.User;
@@ -9,59 +11,51 @@ import java.util.Scanner;
 
 public class UserMenu {
     private UserService userService;
-//    private final String myProfile= "Мой профиль";
-    private final String newBooks= "Новые книги";
-//    private final String seeAllBooks= "Посмотреть все книги";
-    private final String seeByGenre= "Посмотреть по жанрам";
-    private final String searchBook= "Искать";
-    private final String buyBook= "Купить";
-    private final String myOrders= "Мои заказы";
-    private final String basket= "Корзина";
-    private final String news= "Новости";
     private String [] userCredentials;
+    private User user;
 
-    public UserMenu(User user){
-        userService = new UserImpl(user.getId());
-        mainMenu();
+    public UserMenu(UserService userService){
+        this.userService = userService;
     }
 
-    public void mainMenu(){
+
+    public void startMenu(){
         Scanner scanner = new Scanner(System.in);
         while (true){
-            System.out.println("Меню:");
-            System.out.println("1." + "Мой профиль");
-            System.out.println("2." + "Новые книги");
-            System.out.println("3." + "Посмотреть все книги");
-            System.out.println("4." + seeByGenre);
-            System.out.println("5." + searchBook);
-            System.out.println("6." + buyBook);
-            System.out.println("7." + myOrders);
-            System.out.println("8." + basket);
-            System.out.println("9." + news);
+            System.out.println(CommonConstants.MENU);
+            System.out.println(CommonConstants.ONE + " " + UserConstants.MY_PROFILE);
+            System.out.println(CommonConstants.TWO + " " + UserConstants.NEW_BOOKS);
+            System.out.println(CommonConstants.THREE + " " + UserConstants.SEE_ALL_BOOKS);
+            System.out.println(CommonConstants.FOUR + " " + UserConstants.SEARCH_BY_GENRE);
+            System.out.println(CommonConstants.FIVE + " " + UserConstants.SEARCH);
+            System.out.println(CommonConstants.SIX + " " + UserConstants.BUY_BOOK);
+            System.out.println(CommonConstants.SEVEN + " " + UserConstants.MY_ORDERS);
+            System.out.println(CommonConstants.EIGHT + " " + UserConstants.BASKET);
+            System.out.println(CommonConstants.NINE + " " + UserConstants.NEWS);
 
             int menuNum = scanner.nextInt();
             switch (menuNum){
                 case Constants.MY_PROFILE:
-                    System.out.println("1." + "Мой профиль");
+                    System.out.println(CommonConstants.ONE + " " + UserConstants.MY_PROFILE);
                     myProfile();
                     break;
                 case Constants.SEE_ALL_BOOKS:
-                    System.out.println("3." + "Посмотреть все книги");
+                    System.out.println(CommonConstants.THREE + " " + UserConstants.SEE_ALL_BOOKS);
                     seeAllBooks();
                     break;
                 default:
-                    System.out.println("Не правильно ввели. Попробуйте еще раз!");
+                    System.out.println(CommonConstants.TRY_AGAIN);
                     break;
             }
         }
     }
-    public void welcomeUser(User user){
-        System.out.println("Добро пожаловать," + user.getName() + " " + user.getSurname() + "!");
-        System.out.println("Your id is " + user.getId());
+    public void welcomeUser(){
+        System.out.println(CommonConstants.WELCOME + getUser().getName() + " " + getUser().getSurname() + "!");
+        System.out.println("Your id is" + getUser().getId());
     }
 
     public void myProfile(){
-        userCredentials = userService.userProfile();
+        userCredentials = userService.userProfile(getUser().getId());
 
         System.out.println("1.ID: " + userCredentials[Constants.USER_ID]);
         System.out.println("2.Имя: " + userCredentials[Constants.USER_NAME]);
@@ -138,10 +132,13 @@ public class UserMenu {
     }
 
 
+    public User getUser() {
+        return user;
+    }
 
-
-
-
+    public void setUser(User user) {
+        this.user = user;
+    }
 }
 
 

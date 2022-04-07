@@ -1,6 +1,10 @@
 package com.company;
 
 import com.company.commonService.Process;
+import com.company.panels.adminPanel.AdminMenu;
+import com.company.panels.userPanel.UserImpl;
+import com.company.panels.userPanel.UserMenu;
+import com.company.panels.userPanel.UserService;
 import com.company.signIn.Login;
 import com.company.signIn.LoginImpl;
 import com.company.signIn.LoginService;
@@ -15,7 +19,12 @@ public class Main {
         Registration registration= new Registration(registrationService);
 
         LoginService loginService= new LoginImpl();
-        Login login = new Login(loginService);
+
+        UserService userService = new UserImpl();
+        UserMenu userMenu = new UserMenu(userService);
+
+        AdminMenu adminMenu = new AdminMenu();
+        Login login = new Login(loginService, userMenu, adminMenu);
 
         Process process = new Process(registration, login);
         process.startMainMenu();

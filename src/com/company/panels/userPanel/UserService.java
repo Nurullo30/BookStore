@@ -8,7 +8,7 @@ public interface UserService {
 
     public void buyBook();
 
-    String[] userProfile();
+    String[] userProfile(String userId);
 
     void changeCredentials(int oldValue, String newValue);
 

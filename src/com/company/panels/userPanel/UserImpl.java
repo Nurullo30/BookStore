@@ -13,16 +13,13 @@ public class UserImpl extends BookStoreImpl implements UserService {
     private UserDataManager userDataBase;
     private User currentUser;
     private final String [] userCredentials = new String[7];
-    private String userId;
 
-    public UserImpl(String userId){
-        this.userId = userId;
+    public UserImpl(){
         userDataBase = new UserDataBase();
-        currentUser = new User();
     }
 
     @Override
-    public String[] userProfile() {
+    public String[] userProfile(String userId) {
         List<User> userList = userDataBase.getUsers();
         for (User user: userList) {
             if (user.getId().equals(userId)){

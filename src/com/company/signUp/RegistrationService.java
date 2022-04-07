@@ -1,6 +1,5 @@
 package com.company.signUp;
 
-import com.company.UserInfoType;
 import com.company.entities.User;
 
 import java.util.List;

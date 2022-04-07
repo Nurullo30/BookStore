@@ -1,8 +1,7 @@
 package com.company.signUp;
 
-import com.company.StringValue;
-import com.company.UserInfoType;
-import com.company.Validation;
+import com.company.constants.CommonConstants;
+import com.company.commonService.Validation;
 import com.company.constants.Constants;
 import com.company.entities.User;
 import com.company.entities.UserDataBase;
@@ -33,7 +32,7 @@ public class RegistrationImpl implements RegistrationService{
     }
 
     public Boolean checkUserExist(String detail, UserInfoType userInfoType){
-        if (validation.checkUserExist(detail, userInfoType).equals(StringValue.LOGIN_FREE)){
+        if (validation.checkUserExist(detail, userInfoType).equals(CommonConstants.LOGIN_FREE)){
             return true;
         }
         return false;

@@ -1,5 +1,7 @@
 package com.company.panels.adminPanel;
 
+import com.company.constants.CommonConstants;
+import com.company.constants.UserConstants;
 import com.company.entities.Book;
 import com.company.constants.Constants;
 import com.company.entities.User;
@@ -13,71 +15,74 @@ public class AdminMenu {
     private AdminService adminImpl;
     private List<Book> bookList;
     private boolean exitMenu;
-    public AdminMenu(User user) {
-        adminImpl = new AdminImpl();
-        init(); // showMenu
+    public AdminMenu() {
+
     }
 
-    public void init(){
+    public void init(User user){
+        adminImpl = new AdminImpl();
+    }
+
+    public void startMenu(){
         while (true){
-            System.out.println("Добро пожаловать в админку");
+            System.out.println(CommonConstants.WELCOME_ADMIN);
             Scanner scanner = new Scanner(System.in);
-            System.out.println("\n" + "1.Добавить"); // Цыфры с переди
-            System.out.println("2.Удалить");
-            System.out.println("3.Изменить");
-            System.out.println("4.Искать");
-            System.out.println("5.Искать по жанрам");
-            System.out.println("6.Все книги");
-            System.out.println("7.Самые продаваемые книги");
-            System.out.println("8.Самые не продаваемые книги");
-            System.out.println("9.Создать новую полку" + "\n");
-            System.out.println("Пожалуйста выберите функцию:");
+            System.out.println("\n" + CommonConstants.ONE + " "  + UserConstants.ADD_BOOK); // Цыфры с переди
+            System.out.println(CommonConstants.TWO + " " + UserConstants.DELETE_BOOK);
+            System.out.println(CommonConstants.THREE + " " + UserConstants.CHANGE_BOOK);
+            System.out.println(CommonConstants.FOUR + " " + UserConstants.SEARCH);
+            System.out.println(CommonConstants.FIVE + " " + UserConstants.SEARCH_BY_GENRE);
+            System.out.println(CommonConstants.SIX + " " + UserConstants.SEE_ALL_BOOKS);
+            System.out.println(CommonConstants.SEVEN + " " + UserConstants.MOST_SOLD);
+            System.out.println(CommonConstants.EIGHT + " " + UserConstants.LEAST_SOLD);
+            System.out.println(CommonConstants.NINE + " " + UserConstants.ADD_NEW_SHELF  + "\n");
+            System.out.println(CommonConstants.CHOOSE_FUNCTION);
             boolean check = true;
             while (check){
                 try{
                     int menuNumber = scanner.nextInt();
                     switch (menuNumber){
                         case 1:
-                            System.out.println(menuNumber + "." + "Добавить книгу");
+                            System.out.println(CommonConstants.ONE + " "  + UserConstants.ADD_BOOK);
                             addBook();
                             check = false;
                             break;
                         case 2:
-                            System.out.println(menuNumber + "." + "Удалить книгу");
+                            System.out.println(CommonConstants.TWO + " " + UserConstants.DELETE_BOOK);
                             removeBook();
                             check = false;
                             break;
                         case 3:
-                            System.out.println("3.Изменить");
+                            System.out.println(CommonConstants.THREE + " " + UserConstants.CHANGE_BOOK);
                             changeDetails();
                             check = false;
                             break;
                         case 4:
-                            System.out.println("4.Искать книгу");
+                            System.out.println(CommonConstants.FOUR + " " + UserConstants.SEARCH);
                             searchBook();
                             check = false;
                             break;
                         case 5:
-                            System.out.println("5.Искать книгу по жанрам");
+                            System.out.println(CommonConstants.FIVE + " " + UserConstants.SEARCH_BY_GENRE);
                             searchByGenre();
                             check = false;
                             break;
                         case 6:
-                            System.out.println(menuNumber + "." + "Все книги");
+                            System.out.println(CommonConstants.SIX + " " + UserConstants.SEE_ALL_BOOKS);
                             printAllBooks();
                             check = false;
                             break;
                         case 7:
-                            System.out.println("7.Самые продаваемые");
+                            System.out.println(CommonConstants.SEVEN + " " + UserConstants.MOST_SOLD);
                             printMostSold();
                             check = false;
                             break;
                         default:
-                            System.out.println("Не правильный номер. Попробуйте еще раз");
+                            System.out.println(CommonConstants.TRY_AGAIN);
                     }
                 }catch (Exception e){
                     scanner.nextLine();
-                    System.out.println("Выведите число. Попробуйте еще раз: ");
+                    System.out.println(CommonConstants.TRY_AGAIN);
                 }
             }
         }
@@ -88,84 +93,86 @@ public class AdminMenu {
         boolean checkAddMenu = true;
         while (checkAddMenu){
 
-            System.out.println("Название:" + "       | Главное меню *");
+            System.out.println(UserConstants.BOOK_NAME + ": " + CommonConstants.MAIN_MENU);
             String name = scanner.nextLine();
-            if (name.equals("*"))
+            if (name.equals(CommonConstants.STAR))
                 break;
 
-            System.out.println("Автор:" + "       | Главное меню *");
+            System.out.println(UserConstants.BOOK_AUTHOR + ": " + CommonConstants.MAIN_MENU);
             String author = scanner.nextLine();
-            if (author.equals("*"))
+            if (author.equals(CommonConstants.STAR))
                 break;
 
-            System.out.println("Жанр:" + "       | Главное меню *");
+            System.out.println(UserConstants.BOOK_GENRE + ": " + CommonConstants.MAIN_MENU);
             String genre = scanner.nextLine();
-            if (genre.equals("*"))
+            if (genre.equals(CommonConstants.STAR))
                 break;
 
-            System.out.println("Цена:" + "       | Главное меню *");
-
-            String price = numCheck();
-            if (price.equals("*"))
+            System.out.println(UserConstants.BOOK_PRICE + ": " + CommonConstants.MAIN_MENU);
+            String price = "";
+            while (true){
+                price = scanner.nextLine();
+                if(numCheck(price)){
+                    break;
+                } else {
+                    System.out.println(CommonConstants.TRY_AGAIN);
+                }
+            }
+            if (price.equals(CommonConstants.STAR))
                 break;
 
-            System.out.println("Количество:" + "       | Главное меню *");
-            String amount = numCheck();
-            if (amount.equals("*"))
+            System.out.println(UserConstants.BOOK_AMOUNT + ": " + CommonConstants.MAIN_MENU);
+            String amount;
+
+            while (true){
+                amount = scanner.nextLine();
+                String amountValue = "numCheck(price)";
+                if(amountValue!= null){
+                    amount = amountValue;
+                    break;
+                } else{
+                    System.out.println(CommonConstants.TRY_AGAIN);
+                }
+            }
+            if (amount.equals(CommonConstants.STAR))
                 break;
 
             book = adminImpl.addBook(name, author, genre, Integer.parseInt(price), Integer.parseInt(amount));
 
-            System.out.println(book != null ? ("Успешно добавлена в базу! \n" + book +"\n") : ("Не удалось добавить книгу \n"));
+            System.out.println(book != null ? (UserConstants.SUCCESSFULLY_ADDED + "\n" + book +"\n")
+                    : (UserConstants.FAILED_ADDING + " \n"));
 
             exitMenu = true;
             while (exitMenu){
-               System.out.println("Добавить книгу 1 / Главное меню * ");
+               System.out.println(CommonConstants.ONE + " " + UserConstants.ADD_BOOK + "/" + CommonConstants.MAIN_MENU);
                switch (scanner.nextLine()){
-                   case "*":
+                   case CommonConstants.STAR:
                        checkAddMenu = false;
                        exitMenu = false;
                        break;
-                   case "1":
+                   case CommonConstants.ONE:
                        exitMenu = false;
                        break;
                    default:
-                       System.out.println("Не правильно ввели");
+                       System.out.println(CommonConstants.TRY_AGAIN);
                }
            }
         }
     }
 
-    public String numCheck(){
-        Scanner scanner = new Scanner(System.in);
-        while (true){
-            String number = scanner.nextLine();
+    public boolean numCheck(String userValue){
 
-            if (number.equals("*")){
-                return number;
-            } else {
-                boolean loopBreaker = false;
-                int [] nums = {0,1,2,3,4,5,6,7,8,9};
-                for (int i = 0; i < number.length(); i++) {
-                     loopBreaker = false;
-                    for (int j = 0; j < nums.length; j++) {
-                        if ((number.charAt(i) + "").equals(String.valueOf(nums[j]))){
-                            break;
-                        } else if (nums.length-1 == j){
-                            loopBreaker = true;
-                        }
-                    }
-                    if (loopBreaker){
-                        break;
-                    }
-                }
-                if (loopBreaker){
-                    System.out.println("Только цыфры. Попробуйте сного");
-                } else {
-                    return number;
+        String [] numbers = {CommonConstants.ZERO ,CommonConstants.ONE, CommonConstants.TWO, CommonConstants.THREE, CommonConstants.FOUR, CommonConstants.FIVE,
+            CommonConstants.SIX,CommonConstants.SEVEN , CommonConstants.EIGHT, CommonConstants.NINE,};
+        for (int i = 0; i < userValue.length(); i++) {
+            for (int j = 0; j < numbers.length; j++) {
+                String letter = "" + userValue.charAt(i);
+                if (!letter.equals(numbers[j])){
+                    return false;
                 }
             }
         }
+        return true;
     }
 
     public void printAllBooks() {
@@ -222,7 +229,7 @@ public class AdminMenu {
                     System.out.println(books);
                 }
                 System.out.println("Пожалуйста выберите Id книги которую вы хотите изменить: " + "/ Главное меню *");
-                String id = numCheck();
+                String id = scanner.nextLine();
 
                 if (!id.equals("*")){
                     if (adminImpl.checkStatus(Integer.parseInt(id))) {

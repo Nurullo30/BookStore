@@ -1,7 +1,6 @@
 package com.company.commonService;
 
-import com.company.NumericValue;
-import com.company.StringValue;
+import com.company.constants.CommonConstants;
 import com.company.signIn.Login;
 import com.company.signUp.Registration;
 
@@ -20,24 +19,24 @@ public class Process{
 
     public void startMainMenu(){
         boolean UserInMenu = true;
-        System.out.println(StringValue.WELCOME_BOOKSTORE);
+        System.out.println(CommonConstants.WELCOME_BOOKSTORE);
         while (UserInMenu){
-            System.out.println(NumericValue.ONE + " " + StringValue.SIGN_IN +
-                        " "  + NumericValue.TWO + " " + StringValue.SIGN_UP);
+            System.out.println(CommonConstants.ONE + " " + CommonConstants.SIGN_IN +
+                        " "  + CommonConstants.TWO + " " + CommonConstants.SIGN_UP);
 
             int menuNumber = scanner.nextInt();
             switch (menuNumber){
                 case 1:
-                    System.out.println(NumericValue.ONE + " " + StringValue.SIGN_IN);
+                    System.out.println(CommonConstants.ONE + " " + CommonConstants.SIGN_IN);
                     authorizeUser();
                     UserInMenu = false;
                     break;
                 case 2:
-                    System.out.println(NumericValue.TWO + " " + StringValue.SIGN_UP);
+                    System.out.println(CommonConstants.TWO + " " + CommonConstants.SIGN_UP);
                     registration.startReg();
                     break;
                 default:
-                    System.out.println(StringValue.TRY_AGAIN);
+                    System.out.println(CommonConstants.TRY_AGAIN);
             }
         }
     }

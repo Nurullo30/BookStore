@@ -1,4 +1,4 @@
-package com.company;
+package com.company.signUp;
 
 public enum UserInfoType {
     LOGIN,
