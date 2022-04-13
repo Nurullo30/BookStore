@@ -19,7 +19,9 @@ public class UserDataBase implements UserDataManager {
     private String userPath;
 
     public UserDataBase(){
-        userList = new ArrayList<>();
+        if (userList == null){
+            userList = new ArrayList<>();
+        }
         init();
     }
 

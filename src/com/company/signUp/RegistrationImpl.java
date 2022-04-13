@@ -13,8 +13,8 @@ public class RegistrationImpl implements RegistrationService{
     private UserDataManager userDataBase;
     private Validation validation;
 
-    public RegistrationImpl(){
-        userDataBase = new UserDataBase();
+    public RegistrationImpl(UserDataBase userDataBase){
+        this.userDataBase = userDataBase;
         validation = new Validation();
     }
 

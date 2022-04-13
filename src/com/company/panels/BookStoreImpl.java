@@ -20,9 +20,7 @@ import static com.company.constants.Constants.CUSTOMER_PATH;
 import static com.company.constants.Constants.DISCOUNT_PATH;
 
 
-public class BookStoreImpl  {
-    // Найти точки наследование в классах
-    // Текующию дату добавление и сортировка по деталям // Created date // Created by // Edited by
+public class BookStoreImpl implements BookStoreService {
 
     private LoadingFileData loadingFileData;
     protected List<Book> bookList;
@@ -59,7 +57,6 @@ public class BookStoreImpl  {
     public void addToShelve(int shelfId, Book book){
         bookData.put(shelves.get(shelfId), book);
     }
-
 
 
     public List<Book> searchBook(String bookName) {

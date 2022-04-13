@@ -2,10 +2,10 @@ package com.company.signUp;
 
 import com.company.constants.CommonConstants;
 import com.company.constants.Constants;
-
+import com.company.constants.UserConstant;
 import java.util.Scanner;
 
-public class Registration {
+public class Registration implements UserConstant {
     RegistrationService registrationService;
     Scanner scanner;
 
@@ -14,80 +14,89 @@ public class Registration {
         scanner = new Scanner(System.in);
     }
 
-    public void startReg() {
-        boolean userInRegMenu = true;
-        while(userInRegMenu){
-            System.out.println(CommonConstants.NAME + ":");
-            String name = scanner.nextLine();
+    public void startReg() { // Change Method length (too long) // Done
+        while (true) {
+            String name = registerName();
+            String surname = registerSurname();
+            String age = registerAge();
+            String login = registerLogin();
+            String password = registerPassword();
 
-            System.out.println(CommonConstants.SURNAME + ":");
-            String surname = scanner.nextLine();
-            int age = 0;
+            boolean isUerSuccessful = registerUser(name, surname, String.valueOf(age), login, password);
 
-            boolean ageCheck = true;
+            if (!isUerSuccessful)
+                break;
 
-            while(ageCheck){
-                Scanner ageScanner = new Scanner(System.in);
-                System.out.println(CommonConstants.AGE + ":");
-                try {
-                    age = ageScanner.nextInt();
-                    ageCheck = false;
-                } catch (Exception e){
-                    System.out.println(CommonConstants.TRY_AGAIN);
-                }
+            if (exitMenu())
+                break;
+        }
+    }
+    private String registerName(){
+        System.out.println(CommonConstants.NAME + ":");
+        return scanner.nextLine();
+    }
+
+    private String registerSurname(){
+        System.out.println(CommonConstants.SURNAME + ":");
+        return scanner.nextLine();
+    }
+
+
+    private String registerAge(){
+        int age = 0;
+        boolean ageCheck = true;
+        while(ageCheck){
+            Scanner ageScanner = new Scanner(System.in);
+            System.out.println(CommonConstants.AGE + ":");
+            try {
+                age = ageScanner.nextInt();
+                ageCheck = false;
+            } catch (Exception e){
+                System.out.println(CommonConstants.TRY_AGAIN);
             }
-
-            String login ="";
-            boolean loginCheck = true;
-            while (loginCheck){
-                System.out.println(CommonConstants.LOGIN);
-                login = scanner.nextLine();
-
-                boolean loginExist = registrationService.checkUserExist(login, UserInfoType.LOGIN);
-
-                if (loginExist){
-                    loginCheck = false;
-                    break;
-                } else {
-                    System.out.println(CommonConstants.USER_EXIST);
-                }
-            }
-
-            System.out.println(CommonConstants.PASSWORD);
-            String password = scanner.nextLine();
-
-            String regStatus  = registrationService.registration(name, surname, String.valueOf(age), login , password);
-
-
-            if (regStatus.equals(Constants.SUCCESSFUL)){
-                System.out.println(CommonConstants.REGISTRATION_SUCCESS);
-            } else if (regStatus.equals(Constants.FAILED)){
-                System.out.println(CommonConstants.REGISTRATION_FAIL);
-                userInRegMenu = false;
+        }
+        return String.valueOf(age);
+    }
+    private String registerLogin(){
+        String login ="";
+        boolean loginCheck = true;
+        while (loginCheck){
+            System.out.println(CommonConstants.LOGIN);
+            login = scanner.nextLine();
+            if (registrationService.checkUserExist(login, UserInfoType.LOGIN)){
+                loginCheck = false;
                 break;
             }
+            System.out.println(CommonConstants.USER_EXIST);
+        }
+       return login;
+    }
+    public String registerPassword(){
+        System.out.println(CommonConstants.PASSWORD);
+        return scanner.nextLine();
+    }
 
-
-            while (true){
-                System.out.println(CommonConstants.STAR + " " + CommonConstants.MAIN_MENU);
-                String mainMenuNum = scanner.nextLine();
-
-                boolean exit = exitMenu(mainMenuNum);
-
-                if (exit){
-                    userInRegMenu = false;
-                    break;
-                } else {
-                    System.out.println(CommonConstants.TRY_AGAIN);
-                }
-            }
+    private boolean registerUser(String name, String surname, String age, String login, String password){
+       String regStatus = registrationService.registration(name, surname, age, login , password);
+        if (regStatus.equals(Constants.SUCCESSFUL)){
+            System.out.println(REGISTRATION_SUCCESS);
+            return true;
+        } else {
+           System.out.println(REGISTRATION_FAIL);
+           return false;
         }
     }
 
-    public boolean exitMenu(String exitValue){
-        if (exitValue.equals(CommonConstants.STAR)){
-            return true;
-        } else
-        return false;
+    public boolean exitMenu(){
+        while (true) {
+            System.out.println(CommonConstants.ONE + " " + CommonConstants.MAIN_MENU);
+            String mainMenuNum = scanner.nextLine();
+            boolean isMainMenu = mainMenuNum.equals(CommonConstants.ONE);
+            if(isMainMenu){
+               break;
+            }
+            System.out.println(CommonConstants.TRY_AGAIN);
+        }
+        return true;
     }
 }

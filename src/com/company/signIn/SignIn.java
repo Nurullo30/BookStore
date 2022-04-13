@@ -1,34 +1,36 @@
 package com.company.signIn;
 
 import com.company.commonService.UserRole;
+import com.company.constants.CommonConstants;
 import com.company.entities.User;
 import com.company.panels.adminPanel.AdminMenu;
 import com.company.panels.userPanel.UserMenu;
 
 import java.util.Scanner;
 
-public class Login {
-    private LoginService loginService;
+public class SignIn {
+    private SignInService signInService;
     private UserMenu userMenu;
     private AdminMenu adminMenu;
+    Scanner scanner;
 
-    public Login(LoginService loginService, UserMenu userMenu, AdminMenu adminMenu){
-        this.loginService = loginService;
+    public SignIn(SignInService signInService, UserMenu userMenu, AdminMenu adminMenu){
+        this.signInService = signInService;
         this.userMenu = userMenu;
         this.adminMenu = adminMenu;
+        scanner = new Scanner(System.in);
     }
 
     public void checkUser(){
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("Добро пожаловать! Пожалуйста введите логин и пароль");
+        System.out.println(CommonConstants.WELCOME_LOGIN);
         while (true){
-            System.out.println("Логин:");
+            System.out.println(CommonConstants.LOGIN + ":");
             String login = scanner.nextLine();
 
-            System.out.println("Пароль:");
+            System.out.println(CommonConstants.PASSWORD + ":");
             String password = scanner.nextLine();
 
-            User user = loginService.checkForUser(login, password);
+            User user = signInService.checkForUser(login, password);
 
             if (user != null && user.getUserRole().equals(UserRole.USER)){
                 userMenu.setUser(user);
@@ -38,7 +40,7 @@ public class Login {
                 adminMenu.startMenu();
                 break;
             } else {
-                System.out.println("Не правильно ввели. Пожалуйста проверьте еще раз! \n");
+                System.out.println(CommonConstants.TRY_AGAIN + "\n");
             }
         }
     }

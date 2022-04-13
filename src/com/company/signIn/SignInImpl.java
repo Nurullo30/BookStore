@@ -7,26 +7,20 @@ import com.company.entities.UserDataBase;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LoginImpl implements LoginService {
-    private List<User> userList;
+public class SignInImpl implements SignInService {
+    private List<User> userList;// change name (User)
     private String userId;
     UserDataBase userDataBase;
 
-    public LoginImpl() {
+    public SignInImpl(UserDataBase userDataBase) {
         userList = new ArrayList<>();
-        userDataBase = new UserDataBase();
+        this.userDataBase = userDataBase;
     }
 
     @Override
-    public User checkForUser(String login, String password) {
-        User user  = new User();
-        user = userDataBase.checkForUser(login,password);
-        if (user != null)
-            return user;
-
-        return null;
+    public User checkForUser(String login, String password) { // change name
+       return userDataBase.checkForUser(login, password); // create an exception for user not found
     }
-
 
 //        userList = userDataBase.getUsers();
 //

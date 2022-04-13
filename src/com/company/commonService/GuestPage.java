@@ -1,19 +1,19 @@
 package com.company.commonService;
 
 import com.company.constants.CommonConstants;
-import com.company.signIn.Login;
+import com.company.signIn.SignIn;
 import com.company.signUp.Registration;
 
 import java.util.Scanner;
 
-public class Process{
+public class GuestPage {
     private Scanner scanner;
     private Registration registration;
-    private Login login;
+    private SignIn signIn;
 
-    public Process(Registration registration, Login login){
+    public GuestPage(Registration registration, SignIn signIn){
        this.registration = registration;
-       this.login = login;
+       this.signIn = signIn;
        scanner = new Scanner(System.in);
     }
 
@@ -28,7 +28,7 @@ public class Process{
             switch (menuNumber){
                 case 1:
                     System.out.println(CommonConstants.ONE + " " + CommonConstants.SIGN_IN);
-                    authorizeUser();
+                    signIn.checkUser();
                     UserInMenu = false;
                     break;
                 case 2:
@@ -39,9 +39,5 @@ public class Process{
                     System.out.println(CommonConstants.TRY_AGAIN);
             }
         }
-    }
-
-    public void authorizeUser(){
-       login.checkUser();
     }
 }
